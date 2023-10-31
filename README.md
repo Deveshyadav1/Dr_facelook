@@ -9,10 +9,7 @@
 
 ![Screenshot 2023-10-31 165444](https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/e935c817-dae1-4740-842d-da44ab386432)
 
-
-
-![Screenshot 2023-10-31 165444](https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/bb0e5580-9f31-40f9-9ea9-32974d2ddb9e)
-
+![Screenshot 2023-10-31 171823](https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/8f4bf302-29a8-4575-a2bd-55358a88dd9e)
 
 
 ## 1. About Dr.Facelook

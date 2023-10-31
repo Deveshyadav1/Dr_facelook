@@ -7,6 +7,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/aaa96da9-74e8-4b96-8fe1-8ff2eba96f5e" width="400" alt="Laravel Logo"></a></p>
+
+![Screenshot 2023-10-31 164650](https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/aaa96da9-74e8-4b96-8fe1-8ff2eba96f5e)
+
+
+
 ## 1. About Dr.Facelook
 
 "Welcome to our innovative healthcare platform Dr Facelook, built with Laravel and Bootstrap. Connect with expert doctors, schedule virtual checkups, and order medicines from the comfort of your home. Seamlessly bridging the gap between patients, healthcare professionals, and chemists, we bring quality healthcare to your fingertips."

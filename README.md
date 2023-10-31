@@ -80,19 +80,6 @@ Finding Doctors: Users can search and find doctors specializing in various field
 
 . [Will Release Soon] API Documentation: If you're a developer, explore our API documentation. It includes information about endpoints, request methods, and response formats, enabling integration with our application.
 
-## 13. Troubleshooting
-
-Troubleshooting: Encounter common issues or errors? Our troubleshooting section provides solutions to frequently asked questions and problems users might face.
-
-## 14. Frequently Asked Questions (FAQ)
-
-Frequently Asked Questions (FAQ): Find answers to commonly asked questions here. Save time by checking this section for quick solutions to common queries.
-
-## 15. Conclusion
-
-. Conclusion: We hope this documentation has been helpful in setting up and using our web application.
-. For further support or to contribute to our open-source project, feel free to contact us.
-
 ## 16. License
 
 License: Our application is distributed under [Waiting....]. Please refer to the license for details regarding usage, distribution, and modification rights.

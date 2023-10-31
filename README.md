@@ -16,20 +16,20 @@ This documentation will guide you through the setup and usage of our application
 
 ## 2. Prerequisites
 
-Prerequisites: Before getting started, ensure that you have the following in place:
-A web server with PHP support.
-Composer installed on your system.
-A MySQL or compatible database.
-Basic knowledge of Laravel and Bootstrap.
+.Prerequisites: Before getting started, ensure that you have the following in place:
+.A web server with PHP support.
+.Composer installed on your system.
+.A MySQL or compatible database.
+.Basic knowledge of Laravel and Bootstrap.
 
  
 ## 3. Installation
 
 Installation: Follow these steps to install and set up the application:
-Clone the GitHub repository to your server.
-Configure your database connection in the .env file.
-Run migrations and seeders to set up the database schema and initial data.
-Set any required environment variables in the .env file.
+.Clone the GitHub repository to your server.
+.Configure your database connection in the .env file.
+.Run migrations and seeders to set up the database schema and initial data.
+.Set any required environment variables in the .env file.
 
 
 ## 4. Configuration
@@ -40,7 +40,9 @@ Configuration: Customize the application configuration to suit your needs. This 
 ## 5. User Roles and Permissions
 
 User Roles and Permissions: Our application has three primary roles:
-User: Registered patients and general users.
+
+### User: Registered patients and general users.
+
 Doctor: Registered medical professionals.
 Chemist: Online medicine providers.
 Learn about the permissions and capabilities of each role in our application.
@@ -54,38 +56,43 @@ User Registration: Patients and doctors can register using our application. Duri
 
 Finding Doctors: Users can search and find doctors specializing in various fields. Use our search functionality and filters to narrow down the options and find the right doctor for your needs.
 
-# 8. Appointment Scheduling
+## 8. Appointment Scheduling
 
-Appointment Scheduling: Schedule appointments with doctors using our user-friendly interface. Specify preferred dates and times for your appointments, and our system will notify you about confirmed slots.
+. Appointment Scheduling: Schedule appointments with doctors using our user-friendly interface.
+. Specify preferred dates and times for your appointments, and our system will notify you about confirmed slots.
 
-# 9. Virtual Checkup
+## 9. Virtual Checkup
 
-Virtual Checkup: Learn how to conduct virtual health checkups with doctors through our application. Understand the process and features for a seamless interaction with medical professionals.
+. Virtual Checkup: Learn how to conduct virtual health checkups with doctors through our application.
+. Understand the process and features for a seamless interaction with medical professionals.
 
-# 10. Ordering Medicine
+## 10. Ordering Medicine
 
-Ordering Medicine: Ordering medicine from online chemists is easy with our application. We provide a straightforward ordering process, payment options, and any prescription requirements.
+. Ordering Medicine: Ordering medicine from online chemists is easy with our application.
+. We provide a straightforward ordering process, payment options, and any prescription requirements.
 
-# 11. Delivery Process
+## 11. Delivery Process
 
-Delivery Process: Get insights into the medicine delivery process. Understand the estimated delivery times and tracking options for your orders.
+. Delivery Process: Get insights into the medicine delivery process.
+. Understand the estimated delivery times and tracking options for your orders.
 
-# 12. API Documentation
+## 12. API Documentation
 
-API Documentation: If you're a developer, explore our API documentation. It includes information about endpoints, request methods, and response formats, enabling integration with our application.
+. [Will Release Soon] API Documentation: If you're a developer, explore our API documentation. It includes information about endpoints, request methods, and response formats, enabling integration with our application.
 
-# 13. Troubleshooting
+## 13. Troubleshooting
 
 Troubleshooting: Encounter common issues or errors? Our troubleshooting section provides solutions to frequently asked questions and problems users might face.
 
-# 14. Frequently Asked Questions (FAQ)
+## 14. Frequently Asked Questions (FAQ)
 
 Frequently Asked Questions (FAQ): Find answers to commonly asked questions here. Save time by checking this section for quick solutions to common queries.
 
-# 15. Conclusion
+## 15. Conclusion
 
-Conclusion: We hope this documentation has been helpful in setting up and using our web application. For further support or to contribute to our open-source project, feel free to contact us.
+. Conclusion: We hope this documentation has been helpful in setting up and using our web application.
+. For further support or to contribute to our open-source project, feel free to contact us.
 
-# 16. License
+## 16. License
 
-License: Our application is distributed under [insert your chosen license here]. Please refer to the license for details regarding usage, distribution, and modification rights.
+License: Our application is distributed under [Waiting....]. Please refer to the license for details regarding usage, distribution, and modification rights.

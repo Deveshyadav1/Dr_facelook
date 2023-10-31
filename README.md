@@ -7,11 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/aaa96da9-74e8-4b96-8fe1-8ff2eba96f5e" width="400" alt="Laravel Logo"></a></p>
-
-![Screenshot 2023-10-31 164650](https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/aaa96da9-74e8-4b96-8fe1-8ff2eba96f5e)
-
+![Screenshot 2023-10-31 165444](https://github.com/Deveshyadav1/Dr_facelook/assets/50092905/e935c817-dae1-4740-842d-da44ab386432)
 
 
 ## 1. About Dr.Facelook

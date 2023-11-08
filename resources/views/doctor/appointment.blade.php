@@ -21,7 +21,7 @@
 
 
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>Appointments</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -341,7 +341,7 @@
 
 
 
-  <div class="container-fluid pt-4 px-4">
+  <div class="container-fluid pt-4 px-2">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Salse</h6>
@@ -360,8 +360,8 @@
                                     
                                     <th scope="col">Title</th>
                                     <th scope="col">Date / Time</th>
-                                    <th scope="col">Members</th>
-                                    <th scope="col">Meeting ID</th>
+                                    <th scope="col">Patient</th>
+                                    
                                     <th scope="col">created_at</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
@@ -370,9 +370,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($appointments as $appointment)
-                                
-                                $ststus;
-                                $color;
+            
                                 <?php if($appointment->status==0)
                                          {
                                             
@@ -401,7 +399,7 @@
                                     <td>{{ $appointment->title }}</td>
                                     <td>{{ \Carbon\Carbon::parse($appointment->datetime)->format('j F Y') }} {{ \Carbon\Carbon::parse($appointment->datetime)->format('g:i A') }} </td>
                                     <td>{{ $appointment->members }}</td>
-                                    <td>{{ $appointment->meet_id }}</td>
+                                    <!-- <td>{{ $appointment->meet_id }}</td> -->
                                     <td>{{ $appointment->created_at }}</td>
                                     <td><button type="button" class="btn btn-info rounded-pill m-2"> <?php $status;/*$status['text'];*/ ?></button></td>
                                     <td><button class="btn btn-danger m-2">Delete</button> </td> 

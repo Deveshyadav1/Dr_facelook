@@ -34,7 +34,7 @@
             <div class="site-info">
               <a href="#"><span class="mai-call text-primary"></span> +00 123 4455 6666</a>
               <span class="divider">|</span>
-              <a href="#"><span class="mai-mail text-primary"></span> mail@example.com</a>
+              <a href="#"><span class="mai-mail text-primary"></span> dr.facelook@gmail.com</a>
             </div>
           </div>
           <div class="col-sm-4 text-right text-sm">
@@ -51,7 +51,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="#"><span class="text-primary">One</span>-Health</a>
+        <a class="navbar-brand" href="#"><span class="text-primary">Dr</span> Facelook</a>
 
         <form action="#">
           <div class="input-group input-navbar">
@@ -181,6 +181,8 @@
     </div> <!-- .bg-light -->
   </div> <!-- .bg-light -->
 
+
+
   <div class="page-section">
     <div class="container">
       <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
@@ -207,7 +209,7 @@
               <img src="../assets/img/doctors/doctor_2.jpg" alt="">
               <div class="meta">
                 <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                <a href="/chatify/1"><span class="mai-logo-whatsapp"> </span></a>
               </div>
             </div>
             <div class="body">

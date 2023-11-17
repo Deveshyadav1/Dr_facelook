@@ -36,7 +36,7 @@
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">Loading..</span>
             </div>
         </div>
         <!-- Spinner End -->
@@ -118,7 +118,7 @@
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <h6 class="fw-normal mb-0">Jhon send you  message</h6>
                                         <small>15 minutes ago</small>
                                     </div>
                                 </div>

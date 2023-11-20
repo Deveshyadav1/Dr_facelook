@@ -94,13 +94,16 @@
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
             </li>
+
+            @if (Auth::check())
+            {{Auth::user()->name}}&nbsp;&nbsp; 
+
+    <form action="{{ route('logout') }}" method="POST" style="display: inline-block;">
+        @csrf
+        <button class="btn btn-primary" type="submit">Logout</button>
+    </form>
+@endif
            
-            
-
-      
-
-
-
 @else
             
             <li class="nav-item">
@@ -140,7 +143,7 @@
               <div class="circle-shape bg-secondary text-white">
                 <span class="mai-chatbubbles-outline"></span>
               </div>
-              <p><span>Chat</span> with a doctors</p>
+              <p><span>Chat</span> with  Doctors</p>
             </div>
           </a>  
           </div>

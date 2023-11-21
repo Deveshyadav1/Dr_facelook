@@ -30,9 +30,8 @@ Route::get('/appointment',[DoctorController::class,'appointment']);
 Route::get('/appointment_status',[DoctorController::class,'appointment_status']);
 Route::get('/appointment_type',[DoctorController::class,'appointment_type']);
 
-/*Route::get('/create-appointment',[DoctorController::class,'create_appointment']);
-
-Route::post('/create-appointment', 'DoctorController@create_appointment')->name('create.appointment');*/
+Route::post('/submit-appointment', [AppointmentController::class, 'submit']);
+/*Route::post('/create-appointment', 'DoctorController@create_appointment')->name('create.appointment');*/
 
 Route::post('/create-appointment', [DoctorController::class,'create_appointment'])->name('create.appointment');
 

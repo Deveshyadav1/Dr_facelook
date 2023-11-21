@@ -321,12 +321,12 @@ input[type=text]:placeholder {
 <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div>
+            <div class="mt-4">
                
                 <x-input id="email" class="fadeIn second" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Email" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-2">
                 
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Password" />
             </div>

@@ -50,18 +50,10 @@ class HomeController extends Controller
    
  public function submit(Request $request)
     {
-        // Validate the form data
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'date' => 'required|date',
-            'department' => 'required|string',
-            'number' => 'required|string',
-            'message' => 'required|string',
-        ]);
+        // No need for server-side validation in this example
 
         // Store the data in the 'user_appointment' table
-        User_appointment::create($validatedData);
+        User_appointment::create($request->all());
 
         // Return a response (you can customize this based on your needs)
         return response()->json(['message' => 'Appointment submitted successfully']);

@@ -355,13 +355,14 @@ input[type=text]:placeholder {
 
 <body style="background-color: #f8f9fa;">
 
-  <div class="container mb-3">
+<a href="{{route('google-auth')}}">  <div class="container mb-3">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
         <i class="fab fa-google" style="font-size: 2rem; color: #00D9A5;"></i>
       </div>
     </div>
   </div>
+</a>
 
 
     <!-- Remind Passowrd -->

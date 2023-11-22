@@ -27,6 +27,17 @@
   <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
 
   <link rel="stylesheet" href="../assets/css/theme.css">
+
+
+  <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include Toastify -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<!-- Include CSRF token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 
@@ -113,13 +124,17 @@
            
 @else
             
-            <li class="nav-item">
-              <a class="btn btn-primary ml-lg-3" href="{{route('login')}}">Login</a>
-            </li>
+            <div class="navbar-nav">
+    <ul class="navbar-nav">
+        <li class="nav-item mt-2">
+            <a class="btn btn-primary ml-lg-3" href="{{ route('login') }}">Login</a>
+        </li>
 
-            <li class="nav-item">
-              <a class="btn btn-primary ml-lg-3" href="{{route('register')}}">Register</a>
-            </li>
+        <li class="nav-item mt-2">
+            <a class="btn btn-primary ml-lg-3" href="{{ route('register') }}">Register</a>
+        </li>
+    </ul>
+</div>
     
     @endauth
     @endif      
@@ -135,7 +150,7 @@
       <div class="container text-center wow zoomIn">
         <span class="subhead">Let's make your life happier</span>
         <h1 class="display-4">Healthy Living</h1>
-        <a href="#" class="btn btn-primary">Let's Consult</a>
+        <a href="#consult-section" class="btn btn-primary">Let's Consult</a>
       </div>
     </div>
   </div>
@@ -364,13 +379,13 @@
   </div> <!-- .page-section -->
 
 
-<!-- ===============================  Make An aappointment =========================== -->
+<!-- ===============================  Make An appointment =========================== -->
 
 @if(Route::has('login'))
 
 @auth
 
-<div class="page-section">
+<div class="page-section" id="consult-section">
     <div class="container">
       <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
@@ -404,6 +419,8 @@
             <input type="text" id="number" class="form-control" placeholder="Number..">
           </div>
 
+          <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
+
          
           
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
@@ -427,7 +444,7 @@
            
 @else
             
-         <div class="page-section">
+      <div class="page-section" id="consult-section">
     <div class="container">
       <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
@@ -461,6 +478,8 @@
             <input type="text" id="number" class="form-control" placeholder="Number..">
           </div>
 
+          <input type="hidden" name="user_id" id="user_id" value="">
+
          
           
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
@@ -469,10 +488,10 @@
         
         </div>
 
-        <button type="button"  class="btn btn-primary mt-3 wow zoomIn main-form">Submit Request</button>
+        <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
       </form>
     </div>
-  </div>  
+  </div>
     
     @endauth
     @endif 
@@ -575,40 +594,70 @@
     $('.main-form').submit(function(e) {
       e.preventDefault();
 
-      // Get form data
-      var formData = $(this).serialize();
+      // Get form data based on element IDs
+      var formData = {
+        user_id:$('#user_id').val(),
+        name: $('#name').val(),
+        email: $('#email').val(),
+        date: $('#myDateInput').val(),
+        department: $('#checkup').val(),
+        number: $('#number').val(),
+        message: $('#message').val(),
+        _token: $('meta[name="csrf-token"]').attr('content')
+      };
+
+      // Client-side validation
+      if (!formData.name || !formData.email || !formData.date || !formData.department || !formData.number || !formData.message) {
+        // Show an error toast
+        Toastify({
+          text: 'Validation failed: All fields must be filled.',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: '#ff6347', // Tomato color for error
+          stopOnFocus: true
+        }).showToast();
+        return;
+      }
 
       // Make Ajax request to the Laravel route
       $.ajax({
         type: 'POST',
         url: '/submit-appointment',
         data: formData,
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
         success: function(response) {
           // Show a success toast
           Toastify({
             text: response.message,
             duration: 3000,
             close: true,
-            gravity: 'top', // 'top' or 'bottom'
-            position: 'center', // 'left', 'center', or 'right'
-            backgroundColor: '#4CAF50',
-            stopOnFocus: true // Prevents dismissing of toast on hover
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: '#4CAF50', // Green color for success
+            stopOnFocus: true
           }).showToast();
-          
+
           // Optionally, reset the form
           $('.main-form')[0].reset();
         },
         error: function(error) {
-          // Handle the error (you can customize this based on your needs)
-          console.error('Error:', error);
+          // Show an error toast for the Ajax request
+          Toastify({
+            text: 'Error submitting appointment. Please try again later.',
+            duration: 3000,
+            close: true,
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: '#ff6347', // Tomato color for error
+            stopOnFocus: true
+          }).showToast();
         }
       });
     });
   });
 </script>
+
 
   
 </body>

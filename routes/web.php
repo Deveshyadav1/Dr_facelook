@@ -25,12 +25,11 @@ Route::get('/home',[HomeController::class,'redirect']);
 
 Route::get('/',[HomeController::class,'index']);
 
-
 Route::get('/appointment',[DoctorController::class,'appointment']);
 Route::get('/appointment_status',[DoctorController::class,'appointment_status']);
 Route::get('/appointment_type',[DoctorController::class,'appointment_type']);
 
-Route::post('/submit-appointment', [AppointmentController::class, 'submit']);
+Route::post('/submit-appointment', [HomeController::class, 'submit']);
 /*Route::post('/create-appointment', 'DoctorController@create_appointment')->name('create.appointment');*/
 
 Route::post('/create-appointment', [DoctorController::class,'create_appointment'])->name('create.appointment');
@@ -50,3 +49,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('auth/google',[GoogleAuthController::class,'redirect'])->name('google-auth');
+
+Route::get('auth/google/call-back',[GoogleAuthController::class,'callbackGoogle']);

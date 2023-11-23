@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Laravel\Socialite\Facades\Socialite;
+
+use App\Models\User;
+
 class GoogleAuthController extends Controller
 {
      public function redirect()

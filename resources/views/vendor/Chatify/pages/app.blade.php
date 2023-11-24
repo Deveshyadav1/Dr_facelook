@@ -5,10 +5,10 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="/home"><i class="fas fa-user-md"></i> <span class="messenger-headTitle">Dr Facelook ( {{Auth::user()->name}} ) </span> </a>
+                <a href="/home"><i style="color:#00D9A5;" class="fas fa-user-md"></i> <span class="messenger-headTitle">Dr Facelook ( {{Auth::user()->name}} ) </span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
-                    <a href="#"><i class="fas fa-cog settings-btn"></i></a>
+                    <a href="#"><i style="color:#00D9A5;" class="fas fa-cog settings-btn"></i></a>
                     <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
                 </nav>
             </nav>

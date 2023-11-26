@@ -38,6 +38,44 @@
 
 <!-- Include CSRF token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
+<style>
+
+ /* Define a CSS class for a beautiful highlighting effect on hover */
+.highlight-on-hover {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.highlight-on-hover:hover {
+    transform: scale(1.05); /* Enlarge the element on hover */
+    box-shadow: 0 5px 15px #00D9A5; /* Add a subtle shadow */
+    border-radius: 10px;
+}
+
+.highlight-on-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(#00D9A5); /* Gradient overlay */
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    z-index: -1;
+    border-radius: 50px;
+}
+
+.highlight-on-hover:hover::before {
+    opacity: 1; /* Make the gradient overlay visible on hover */
+}
+
+
+</style>
+
+
 </head>
 <body>
 
@@ -45,27 +83,7 @@
   <div class="back-to-top"></div>
 
   <header>
-    <div class="topbar">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8 text-sm">
-            <div class="site-info">
-              <a href="#"><span class="mai-call text-primary"></span> +00 123 4455 6666</a>
-              <span class="divider">|</span>
-              <a href="#"><span class="mai-mail text-primary"></span> dr.facelook@gmail.com</a>
-            </div>
-          </div>
-          <div class="col-sm-4 text-right text-sm">
-            <div class="social-mini-button">
-              <a href="#"><span class="mai-logo-facebook-f"></span></a>
-              <a href="#"><span class="mai-logo-twitter"></span></a>
-              <a href="#"><span class="mai-logo-dribbble"></span></a>
-              <a href="#"><span class="mai-logo-instagram"></span></a>
-            </div>
-          </div>
-        </div> <!-- .row -->
-      </div> <!-- .container -->
-    </div> <!-- .topbar -->
+
 
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
       <div class="container">
@@ -84,7 +102,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
- 
+
         <div class="collapse navbar-collapse" id="navbarSupport">
 
 
@@ -92,38 +110,38 @@
 
           <ul class="navbar-nav ml-auto">
 
-            
+
 
 @if(Route::has('login'))
 
 @auth
 <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link highlight-on-hover" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
+              <a class="nav-link highlight-on-hover" href="about.html">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="doctors.html">Doctors</a>
+              <a class="nav-link highlight-on-hover" href="doctors.html">Doctors</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="blog.html">News</a>
+              <a class="nav-link highlight-on-hover" href="blog.html">News</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link highlight-on-hover" href="contact.html">Contact</a>
             </li>
 
             @if (Auth::check())
-            {{Auth::user()->name}}&nbsp;&nbsp; 
+            {{Auth::user()->name}}&nbsp;&nbsp;
 
     <form action="{{ route('logout') }}" method="POST" style="display: inline-block;">
         @csrf
         <button class="btn btn-primary" type="submit">Logout</button>
     </form>
 @endif
-           
+
 @else
-            
+
             <div class="navbar-nav">
     <ul class="navbar-nav">
         <li class="nav-item mt-2">
@@ -135,9 +153,9 @@
         </li>
     </ul>
 </div>
-    
+
     @endauth
-    @endif      
+    @endif
 
           </ul>
         </div> <!-- .navbar-collapse -->
@@ -161,28 +179,28 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-4 py-3 py-md-0">
-          <a href="/chatify"> <div style="color:black;" class="card-service wow fadeInUp">
+          <a href="/chatify"> <div style="color:black;" class="card-service wow fadeInUp highlight-on-hover">
               <div class="circle-shape bg-secondary text-white">
                 <span class="mai-chatbubbles-outline"></span>
               </div>
               <p><span>Chat</span> with  Doctors</p>
             </div>
-          </a>  
+          </a>
           </div>
           <div class="col-md-4 py-3 py-md-0">
-            <div class="card-service wow fadeInUp">
+            <div class="card-service wow fadeInUp highlight-on-hover">
               <div class="circle-shape bg-primary text-white">
                 <span class="mai-shield-checkmark"></span>
               </div>
-              <p><span>One</span>-Health Protection</p>
+              <p><span>Dr</span>-Facelook Protection</p>
             </div>
           </div>
-          <div class="col-md-4 py-3 py-md-0">
-            <div class="card-service wow fadeInUp">
-              <div class="circle-shape bg-accent text-white">
+          <div class="col-md-4 py-3 py-md-0 ">
+            <div class="card-service wow fadeInUp highlight-on-hover">
+              <div class="circle-shape bg-accent text-white ">
                 <span class="mai-basket"></span>
               </div>
-              <p><span>One</span>-Health Pharmacy</p>
+              <p><span>Dr</span>-Facelook Pharmacy</p>
             </div>
           </div>
         </div>
@@ -389,22 +407,22 @@
     <div class="container">
       <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
-      
+
       <form class="main-form">
         <div class="row mt-5 ">
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
             <input type="text" class="form-control" id="name" placeholder="Full name" value="{{Auth::User()->name}}" >
           </div>
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInRight">
             <input type="text" id="email" class="form-control" placeholder="Email address.." value="{{Auth::user()->email}}">
           </div>
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
             <input type="date" class="form-control" id="myDateInput" value="<?php echo $currentDate; ?>">
           </div>
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
             <select name="departement" id="checkup" class="custom-select">
               <option value="general">General Health</option>
@@ -413,20 +431,20 @@
               <option value="neurology">Neurology</option>
               <option value="orthopaedics">Orthopaedics</option>
             </select>
-          </div>         
-         
+          </div>
+
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
             <input type="text" id="number" class="form-control" placeholder="Number..">
           </div>
 
           <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
 
-         
-          
+
+
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
             <textarea name="message" id="message" class="form-control" rows="6" placeholder="Enter message.."></textarea>
           </div>
-        
+
         </div>
 
         <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
@@ -436,34 +454,34 @@
 
 
             @if (Auth::check())
-            
 
- 
-   
+
+
+
 @endif
-           
+
 @else
-            
+
       <div class="page-section" id="consult-section">
     <div class="container">
       <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
-      
+
       <form class="main-form">
         <div class="row mt-5 ">
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
             <input type="text" class="form-control" id="name" placeholder="Full name" value="" >
           </div>
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInRight">
             <input type="text" id="email" class="form-control" placeholder="Email address.." value="">
           </div>
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
             <input type="date" class="form-control" id="myDateInput" value="">
           </div>
-         
+
           <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
             <select name="departement" id="checkup" class="custom-select">
               <option value="general">General Health</option>
@@ -472,29 +490,29 @@
               <option value="neurology">Neurology</option>
               <option value="orthopaedics">Orthopaedics</option>
             </select>
-          </div>         
-         
+          </div>
+
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
             <input type="text" id="number" class="form-control" placeholder="Number..">
           </div>
 
           <input type="hidden" name="user_id" id="user_id" value="">
 
-         
-          
+
+
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
             <textarea name="message" id="message" class="form-control" rows="6" placeholder="Enter message.."></textarea>
           </div>
-        
+
         </div>
 
         <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
       </form>
     </div>
   </div>
-    
+
     @endauth
-    @endif 
+    @endif
 
 
    <!-- .page-section -->
@@ -607,7 +625,7 @@
       };
 
       // Client-side validation
-      if (!formData.name || !formData.email || !formData.date || !formData.department || !formData.number || !formData.message) {
+      if (!formData.name || !formData.email || !formData.date || !formData.department || !formData.number) {
         // Show an error toast
         Toastify({
           text: 'Validation failed: All fields must be filled.',
@@ -659,6 +677,6 @@
 </script>
 
 
-  
+
 </body>
 </html>

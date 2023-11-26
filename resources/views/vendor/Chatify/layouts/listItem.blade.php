@@ -1,11 +1,47 @@
+
+<style>
+
+/* Define a CSS class for a beautiful highlighting effect on hover */
+.highlight-on-hover {
+   position: relative;
+   overflow: hidden;
+   transition: transform 0.3s ease-in-out;
+}
+
+.highlight-on-hover:hover {
+   transform: scale(1.03); /* Enlarge the element on hover */
+   box-shadow: 0 3px 15px #00D9A5; /* Add a subtle shadow */
+   border-radius: 10px;
+}
+
+.highlight-on-hover::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   background: linear-gradient(#00D9A5); /* Gradient overlay */
+   opacity: 0;
+   transition: opacity 0.6s ease-in-out;
+   z-index: -1;
+   border-radius: 50px;
+}
+
+.highlight-on-hover:hover::before {
+   opacity: 1; /* Make the gradient overlay visible on hover */
+}
+
+</style>
+
 {{-- -------------------- Saved Messages -------------------- --}}
 @if($get == 'saved')
-    <table class="messenger-list-item" data-contact="{{ Auth::user()->id }}">
+    <table class="messenger-list-item highlight-on-hover " style="border-radius: 10px; width:95%; margin-left:5px;" data-contact="{{ Auth::user()->id }}">
         <tr data-action="0">
             {{-- Avatar side --}}
             <td>
             <div class="saved-messages avatar av-m">
-                <span class="far fa-bookmark"></span>
+                <span  class="far fa-bookmark" highlight-on-hover></span>
             </div>
             </td>
             {{-- center side --}}
@@ -26,7 +62,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
 <table class="messenger-list-item" data-contact="{{ $user->id }}">
     <tr data-action="0">
         {{-- Avatar side --}}
-        <td style="position: relative">
+        <td style="position: relative highlight-on-hover ">
             @if($user->active_status)
                 <span class="activeStatus"></span>
             @endif

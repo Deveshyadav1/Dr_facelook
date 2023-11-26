@@ -18,18 +18,18 @@ class HomeController extends Controller
         if(Auth::id())
         {
             if (Auth::user()->usertype=='0') {
-                
+
                 return view('user.home');
             }
                elseif (Auth::user()->usertype=='1') {
-                    
+
                     return view('doctor.home');
             }
             else
             {
                 return view('admin.home');
             }
-            
+
         }
         else
         {
@@ -46,8 +46,8 @@ class HomeController extends Controller
       return view('user.home',['doctors' => $doctors]);
     }
 
-   
-   
+
+
  public function submit(Request $request)
     {
         // No need for server-side validation in this example
@@ -56,7 +56,7 @@ class HomeController extends Controller
         User_appointment::create($request->all());
 
         // Return a response (you can customize this based on your needs)
-        return response()->json(['message' => 'Appointment submitted successfully']);
+        return response()->json(['message' => 'Appointment Booked successfully']);
     }
 
 

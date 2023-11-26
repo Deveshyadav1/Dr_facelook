@@ -9,7 +9,7 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#"><i style="color:#00D9A5;" class="fas fa-cog settings-btn"></i></a>
-                    <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
+                    <a href="#" class="listView-x"><i style="color:#00D9A5;" class="fas fa-times"></i></a>
                 </nav>
             </nav>
             {{-- Search input --}}
@@ -17,7 +17,7 @@
             {{-- Tabs --}}
             {{-- <div class="messenger-listView-tabs">
                 <a href="#" class="active-tab" data-view="users">
-                    <span class="far fa-user"></span> Contacts</a>
+                    <span style="color:#00D9A5;" class="far fa-user"></span> Contacts</a>
             </div> --}}
         </div>
         {{-- tabs and lists --}}
@@ -63,8 +63,8 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="/"><i class="fas fa-home"></i></a>
-                    <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
+                    <a href="/"><i style="color:#00D9A5;" class="fas fa-home"></i></a>
+                    <a href="#" class="show-infoSide"><i style="color:#00D9A5;" class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>
             {{-- Internet connection --}}
@@ -102,7 +102,7 @@
         {{-- nav actions --}}
         <nav>
             <p>User Details</p>
-            <a href="#"><i class="fas fa-times"></i></a>
+            <a href="#"><i style="color:#00D9A5;" class="fas fa-times"></i></a>
         </nav>
         {!! view('Chatify::layouts.info')->render() !!}
     </div>

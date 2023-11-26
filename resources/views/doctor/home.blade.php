@@ -1,510 +1,924 @@
- <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Dr. Facelook</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="doctor/img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="doctor/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="doctor/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="doctor/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="doctor/css/style.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="doctor/img/fav.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
+  <link rel="stylesheet" type="text/css" href="doctor/css/style.css">
+  <title>Welcome To Dr Facelook</title>
 </head>
+<body class="bg-gray-100">
 
-<body>
-    <div class="container-xxl position-relative bg-wheat d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading..</span>
+
+<!-- start navbar -->
+<div class="md:fixed md:w-full md:top-0 md:z-20 flex flex-row flex-wrap items-center bg-white p-6 border-b border-gray-300">
+
+    <!-- logo -->
+    <div class="flex-none w-56 flex flex-row items-center">
+      <img src="doctor/img/logo.png" class="w-10 flex-none">
+      <strong class="capitalize ml-1 flex-1">Dr Facelook</strong>
+
+      <button id="sliderBtn" class="flex-none text-right text-gray-900 hidden md:block">
+        <i class="fad fa-list-ul"></i>
+      </button>
+    </div>
+    <!-- end logo -->
+
+    <!-- navbar content toggle -->
+    <button id="navbarToggle" class="hidden md:block md:fixed right-0 mr-6">
+      <i class="fad fa-chevron-double-down"></i>
+    </button>
+    <!-- end navbar content toggle -->
+
+    <!-- navbar content -->
+    <div id="navbar" class="animated md:hidden md:fixed md:top-0 md:w-full md:left-0 md:mt-16 md:border-t md:border-b md:border-gray-200 md:p-10 md:bg-white flex-1 pl-3 flex flex-row flex-wrap justify-between items-center md:flex-col md:items-center">
+      <!-- left -->
+      <div class="text-gray-600 md:w-full md:flex md:flex-row md:justify-evenly md:pb-10 md:mb-10 md:border-b md:border-gray-200">
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-envelope-open-text"></i></a>
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-comments-alt"></i></a>
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-check-circle"></i></a>
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-calendar-exclamation"></i></a>
+      </div>
+      <!-- end left -->
+
+      <!-- right -->
+      <div class="flex flex-row-reverse items-center">
+
+        <!-- user -->
+        <div class="dropdown relative md:static">
+
+          <button class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
+            <div class="w-8 h-8 overflow-hidden rounded-full">
+              <img class="w-full h-full object-cover" src="doctor/img/user.svg" >
             </div>
-        </div>
-        <!-- Spinner End -->
 
+            <div class="ml-2 capitalize flex ">
+              <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{Auth::user()->name}}</h1>
+              <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
+            </div>
+          </button>
 
-        <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-light navbar-light">
-               <!--  <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class=""></i>DASHMIN</h3>
-                </a> -->
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
-                    <a href="/home">
-                    <div class="ms-3">
-                        <h6 class="mb-0">{{Auth::user()->name}}</h6>
-                        <span>Doctor</span>
-                    </div>
-                </a>
-                </div>
-                <div class="navbar-nav w-100">
-                    <a href="/home" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/appointment" class="dropdown-item">Add Appointment</a>
-                            <a href="/appointment_status" class="dropdown-item">Appointment Status</a>
-                            <a href="/appointment_status" class="dropdown-item">Appointment type</a>
-                        </div>
-                    </div>
+          <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
 
-                    
-                    <a href="/appointment" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Appointment</a>
+          <div class="text-gray-500 menu hidden md:mt-10 md:w-full rounded bg-white shadow-md absolute z-20 right-0 w-40 mt-5 py-2 animated faster">
 
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="{{ route('profile.show') }}">
+              <i class="fad fa-user-edit text-xs mr-1"></i>
+              edit my profile
+            </a>
+            <!-- end item -->
 
-                    <a href="/chatify" class="nav-item nav-link"><i class="fas fa-comment-dots"></i>Chat With Patient</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <!-- Sidebar End -->
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
+              <i class="fad fa-inbox-in text-xs mr-1"></i>
+              my inbox
+            </a>
+            <!-- end item -->
 
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
+              <i class="fad fa-badge-check text-xs mr-1"></i>
+              tasks
+            </a>
+            <!-- end item -->
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="/home" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Message</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you  message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all message</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
-                    </div>
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="/chatify">
+              <i class="fad fa-comment-alt-dots text-xs mr-1"></i>
+              chats
+            </a>
+            <!-- end item -->
+
+            <hr>
+
+            <!-- item -->
 
 
 
-                    <div class="nav-item dropdown">
-                        
-                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
-                        </a>
-                    
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{{ route('profile.show') }}" class="dropdown-item">My Profile</a>
-                          
-                          <a href="{{ route('logout') }}" class="dropdown-item"
-   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+              <a href="{{ route('logout') }}" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">log out</a>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     @csrf
 </form>
-                            
-                        </div>
-                    </div>
-   
-                        
-                    </div>
-                </div>
-            </nav>
-            <!-- Navbar End -->
 
+            </a>
+            <!-- end item -->
 
-            <!-- Sale & Revenue Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fas fa-id-card-alt fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Appointment</p>
-                                <h6 class="mb-0">3</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fas fa-user-tag fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Patient</p>
-                                <h6 class="mb-0">14</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-area fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Sale & Revenue End -->
-
-
-            <!-- Sales Chart Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Worldwide Sales</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <canvas id="worldwide-sales"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Salse & Revenue</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <canvas id="salse-revenue"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Sales Chart End -->
-
-
-            <!-- Recent Sales Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Invoice</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- Recent Sales End -->
-
-
-            <!-- Widgets Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-md-6 col-xl-4">
-                        <div class="h-100 bg-light rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0">Messages</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                    <span>Short message goes here...</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                    <span>Short message goes here...</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                    <span>Short message goes here...</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center pt-3">
-                                <img class="rounded-circle flex-shrink-0" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Jhon Doe</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                    <span>Short message goes here...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-xl-4">
-                        <div class="h-100 bg-light rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Calender</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <div id="calender"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-xl-4">
-                        <div class="h-100 bg-light rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">To Do List</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <input class="form-control bg-transparent" type="text" placeholder="Enter task">
-                                <button type="button" class="btn btn-primary ms-2">Add</button>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-2">
-                                <input class="form-check-input m-0" type="checkbox">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 align-items-center justify-content-between">
-                                        <span>Short task goes here...</span>
-                                        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-2">
-                                <input class="form-check-input m-0" type="checkbox">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 align-items-center justify-content-between">
-                                        <span>Short task goes here...</span>
-                                        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-2">
-                                <input class="form-check-input m-0" type="checkbox" checked>
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 align-items-center justify-content-between">
-                                        <span><del>Short task goes here...</del></span>
-                                        <button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center border-bottom py-2">
-                                <input class="form-check-input m-0" type="checkbox">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 align-items-center justify-content-between">
-                                        <span>Short task goes here...</span>
-                                        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center pt-2">
-                                <input class="form-check-input m-0" type="checkbox">
-                                <div class="w-100 ms-3">
-                                    <div class="d-flex w-100 align-items-center justify-content-between">
-                                        <span>Short task goes here...</span>
-                                        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Widgets End -->
-
-
-            <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Dr.Facelook</a>, All Right Reserved. 
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </br>
-                        Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
+          </div>
         </div>
-        <!-- Content End -->
+        <!-- end user -->
+
+        <!-- notifcation -->
+        <div class="dropdown relative mr-5 md:static">
+
+          <button class="text-gray-500 menu-btn p-0 m-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none transition-all ease-in-out duration-300">
+            <i class="fad fa-bells"></i>
+          </button>
+
+          <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
+
+          <div class="menu hidden rounded bg-white md:right-0 md:w-full shadow-md absolute z-20 right-0 w-84 mt-5 py-2 animated faster">
+            <!-- top -->
+            <div class="px-4 py-2 flex flex-row justify-between items-center capitalize font-semibold text-sm">
+              <h1>notifications</h1>
+              <div class="bg-teal-100 border border-teal-200 text-teal-500 text-xs rounded px-1">
+                <strong>5</strong>
+              </div>
+            </div>
+            <hr>
+            <!-- end top -->
+
+            <!-- body -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-birthday-cake text-sm"></i>
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">poll..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>4 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-user-circle text-sm"></i>
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">mohamed..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>78 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-images text-sm"></i>
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">new imag..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>65 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-alarm-exclamation text-sm"></i>
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">time is up..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>1 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <!-- end item -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+            <!-- end body -->
+
+            <!-- bottom -->
+            <hr>
+            <div class="px-4 py-2 mt-2">
+              <a href="#" class="border border-gray-300 block text-center text-xs uppercase rounded p-1 hover:text-teal-500 transition-all ease-in-out duration-500">
+                view all
+              </a>
+            </div>
+            <!-- end bottom -->
+          </div>
+        </div>
+        <!-- end notifcation -->
+
+        <!-- messages -->
+        <div class="dropdown relative mr-5 md:static">
+
+          <button class="text-gray-500 menu-btn p-0 m-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none transition-all ease-in-out duration-300">
+            <i class="fad fa-comments"></i>
+          </button>
+
+          <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
+
+          <div class="menu hidden md:w-full md:right-0 rounded bg-white shadow-md absolute z-20 right-0 w-84 mt-5 py-2 animated faster">
+            <!-- top -->
+            <div class="px-4 py-2 flex flex-row justify-between items-center capitalize font-semibold text-sm">
+              <h1>messages</h1>
+              <div class="bg-teal-100 border border-teal-200 text-teal-500 text-xs rounded px-1">
+                <strong>3</strong>
+              </div>
+            </div>
+            <hr>
+            <!-- end top -->
+
+            <!-- body -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                <img class="w-full h-full object-cover" src="doctor/img/user1.jpg" alt="">
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">mohamed said</h1>
+                  <p class="text-xs text-gray-500">yeah i know</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>4 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                <img class="w-full h-full object-cover" src="doctor/img/user2.jpg" alt="">
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">sull goldmen</h1>
+                  <p class="text-xs text-gray-500">for sure</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>1 day ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                <img class="w-full h-full object-cover" src="doctor/img/user3.jpg" alt="">
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">mick</h1>
+                  <p class="text-xs text-gray-500">is typing ....</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>31 feb</p>
+                </div>
+              </div>
+
+            </a>
+            <!-- end item -->
+
+
+            <!-- end body -->
+
+            <!-- bottom -->
+            <hr>
+            <div class="px-4 py-2 mt-2">
+              <a href="#" class="border border-gray-300 block text-center text-xs uppercase rounded p-1 hover:text-teal-500 transition-all ease-in-out duration-500">
+                view all
+              </a>
+            </div>
+            <!-- end bottom -->
+          </div>
+        </div>
+        <!-- end messages -->
+
+
+      </div>
+      <!-- end right -->
     </div>
+    <!-- end navbar content -->
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="doctor/lib/chart/chart.min.js"></script>
-    <script src="public/doctor/lib/easing/easing.min.js"></script>
-    <script src="doctor/lib/waypoints/waypoints.min.js"></script>
-    <script src="doctor/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="doctor/lib/tempusdominus/js/moment.min.js"></script>
-    <script src="doctor/lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="doctor/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+  </div>
+<!-- end navbar -->
 
-    <!-- Template Javascript -->
-    <script src="doctor/js/main.js"></script>
+
+<!-- strat wrapper -->
+<div class="h-screen flex flex-row flex-wrap">
+
+    <!-- start sidebar -->
+  <div id="sideBar" class="relative flex flex-col flex-wrap bg-white border-r border-gray-300 p-6 flex-none w-64 md:-ml-64 md:fixed md:top-0 md:z-30 md:h-screen md:shadow-xl animated faster">
+
+
+    <!-- sidebar content -->
+    <div class="flex flex-col">
+
+      <!-- sidebar toggle -->
+      <div class="text-right hidden md:block mb-4">
+        <button id="sideBarHideBtn">
+          <i class="fad fa-times-circle"></i>
+        </button>
+      </div>
+      <!-- end sidebar toggle -->
+
+      <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">homes</p>
+
+      <!-- link -->
+      <a href="/home" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-chart-pie text-xs mr-2"></i>
+        Analytics dashboard
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="./index-1.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shopping-cart text-xs mr-2"></i>
+        ecommerce dashboard
+      </a>
+      <!-- end link -->
+
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p>
+
+      <!-- link -->
+      <a href="./email.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-envelope-open-text text-xs mr-2"></i>
+        email
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="/chatify" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-comments text-xs mr-2"></i>
+        chat
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shield-check text-xs mr-2"></i>
+        Appointments
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+
+      <a href="/patients" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-users-medical text-xs mr-2"></i>
+        Patients
+      </a>
+
+      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-calendar-edit text-xs mr-2"></i>
+        calendar
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-file-invoice-dollar text-xs mr-2"></i>
+        invoice
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-folder-open text-xs mr-2"></i>
+        file manager
+      </a>
+      <!-- end link -->
+
+
+
+
+    </div>
+    <!-- end sidebar content -->
+
+  </div>
+  <!-- end sidbar -->
+
+  <!-- strat content -->
+  <div class="bg-gray-100 flex-1 p-6 md:mt-16">
+
+
+    <!-- General Report -->
+    <div class="grid grid-cols-4 gap-6 xl:grid-cols-1">
+
+
+    <!-- card -->
+    <div class="report-card">
+        <div class="card">
+            <div class="card-body flex flex-col">
+
+                <!-- top -->
+                <div class="flex flex-row justify-between items-center">
+                    <div class="h6 text-indigo-700 fad fa-shopping-cart"></div>
+                    <span class="rounded-full text-white badge bg-teal-400 text-xs">
+                        12%
+                        <i class="fal fa-chevron-up ml-1"></i>
+                    </span>
+                </div>
+                <!-- end top -->
+
+                <!-- bottom -->
+                <div class="mt-8">
+                    <h1 class="h5 num-4"></h1>
+                    <p>items sales</p>
+                </div>
+                <!-- end bottom -->
+
+            </div>
+        </div>
+        <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+    </div>
+    <!-- end card -->
+
+
+    <!-- card -->
+    <div class="report-card">
+        <div class="card">
+            <div class="card-body flex flex-col">
+
+                <!-- top -->
+                <div class="flex flex-row justify-between items-center">
+                    <div class="h6 text-red-700 fad fa-store"></div>
+                    <span class="rounded-full text-white badge bg-red-400 text-xs">
+                        6%
+                        <i class="fal fa-chevron-down ml-1"></i>
+                    </span>
+                </div>
+                <!-- end top -->
+
+                <!-- bottom -->
+                <div class="mt-8">
+                    <h1 class="h5 num-4"></h1>
+                    <p>new orders</p>
+                </div>
+                <!-- end bottom -->
+
+            </div>
+        </div>
+        <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+    </div>
+    <!-- end card -->
+
+
+    <!-- card -->
+    <div class="report-card">
+        <div class="card">
+            <div class="card-body flex flex-col">
+
+                <!-- top -->
+                <div class="flex flex-row justify-between items-center">
+                    <div class="h6 text-yellow-600 fad fa-sitemap"></div>
+                    <span class="rounded-full text-white badge bg-teal-400 text-xs">
+                        72%
+                        <i class="fal fa-chevron-up ml-1"></i>
+                    </span>
+                </div>
+                <!-- end top -->
+
+                <!-- bottom -->
+                <div class="mt-8">
+                    <h1 class="h5 num-4"></h1>
+                    <p>total Products</p>
+                </div>
+                <!-- end bottom -->
+
+            </div>
+        </div>
+        <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+    </div>
+    <!-- end card -->
+
+
+    <!-- card -->
+    <div class="report-card">
+        <div class="card">
+            <div class="card-body flex flex-col">
+
+                <!-- top -->
+                <div class="flex flex-row justify-between items-center">
+                    <div class="h6 text-green-700 fad fa-users"></div>
+                    <span class="rounded-full text-white badge bg-teal-400 text-xs">
+                        150%
+                        <i class="fal fa-chevron-up ml-1"></i>
+                    </span>
+                </div>
+                <!-- end top -->
+
+                <!-- bottom -->
+                <div class="mt-8">
+                    <h1 class="h5 num-4"></h1>
+                    <p>new Visitor</p>
+                </div>
+                <!-- end bottom -->
+
+            </div>
+        </div>
+        <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+    </div>
+    <!-- end card -->
+
+
+</div>
+    <!-- End General Report -->
+
+    <!-- strat Analytics -->
+    <div class="mt-6 grid grid-cols-2 gap-6 xl:grid-cols-1">
+
+    <!-- update section -->
+    <div class="card bg-teal-400 border-teal-400 shadow-md text-white">
+        <div class="card-body flex flex-row">
+
+            <!-- image -->
+            <div class="img-wrapper w-40 h-40 flex justify-center items-center">
+                <img src="doctor/img/happy.svg" alt="img title">
+            </div>
+            <!-- end image -->
+
+            <!-- info -->
+            <div class="py-2 ml-10">
+                <h1 class="h6">Good Job, Mohamed!</h1>
+                <p class="text-white text-xs">You've finished all of your tasks for this week.</p>
+
+                <ul class="mt-4">
+                    <li class="text-sm font-light"><i class="fad fa-check-double mr-2 mb-2"></i> Finish Dashboard Design</li>
+                    <li class="text-sm font-light"><i class="fad fa-check-double mr-2 mb-2"></i> Fix Issue #74</li>
+                    <li class="text-sm font-light"><i class="fad fa-check-double mr-2"></i> Publish version 1.0.6</li>
+                </ul>
+            </div>
+            <!-- end info -->
+
+        </div>
+    </div>
+    <!-- end update section -->
+
+    <!-- carts -->
+    <div class="flex flex-col">
+
+        <!-- alert -->
+        <div class="alert alert-dark mb-6">
+            Hi! Wait A Minute . . . . . . Follow Me On Twitter
+            <a class="ml-2" target="_blank" href="https://twitter.com/MohamedSaid__">@moesaid</a>
+        </div>
+        <!-- end alert -->
+
+        <!-- charts -->
+        <div class="grid grid-cols-2 gap-6 h-full">
+
+            <div class="card">
+                <div class="py-3 px-4 flex flex-row justify-between">
+                    <h1 class="h6">
+                        <span class="num-4"></span>k
+                        <p>page view</p>
+                    </h1>
+
+                    <div class="bg-teal-200 text-teal-700 border-teal-300 border w-10 h-10 rounded-full flex justify-center items-center">
+                        <i class="fad fa-eye"></i>
+                    </div>
+                </div>
+                <div class="analytics_1"></div>
+            </div>
+
+            <div class="card">
+                <div class="py-3 px-4 flex flex-row justify-between">
+                    <h1 class="h6">
+                        <span class="num-2"></span>k
+                        <p>Unique Users</p>
+                    </h1>
+
+                    <div class="bg-indigo-200 text-indigo-700 border-indigo-300 border w-10 h-10 rounded-full flex justify-center items-center">
+                        <i class="fad fa-users-crown"></i>
+                    </div>
+                </div>
+                <div class="analytics_1"></div>
+            </div>
+
+        </div>
+        <!-- charts    -->
+
+    </div>
+    <!-- end charts -->
+
+
+</div>
+    <!-- end Analytics -->
+
+    <!-- Sales Overview -->
+    <div class="card mt-6">
+
+    <!-- header -->
+    <div class="card-header flex flex-row justify-between">
+        <h1 class="h6">Sales Overview</h1>
+
+        <div class="flex flex-row justify-center items-center">
+
+            <a href="">
+                <i class="fad fa-chevron-double-down mr-6"></i>
+            </a>
+
+            <a href="">
+                <i class="fad fa-ellipsis-v"></i>
+            </a>
+
+        </div>
+
+    </div>
+    <!-- end header -->
+
+    <!-- body -->
+    <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1">
+
+        <div class="p-8">
+            <h1 class="h2">5,337</h1>
+            <p class="text-black font-medium">Sales this month</p>
+
+            <div class="mt-20 mb-2 flex items-center">
+                <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3">
+                    <i class="fa fa-caret-up"></i>
+                </div>
+                <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400">% more sales</span> in comparison to last month.</p>
+            </div>
+
+            <div class="flex items-center">
+                <div class="py-1 px-3 rounded bg-red-200 text-red-900 mr-3">
+                    <i class="fa fa-caret-down"></i>
+                </div>
+                <p class="text-black"><span class="num-2 text-red-400"></span><span class="text-red-400">% revenue per sale</span> in comparison to last month.</p>
+            </div>
+
+            <a href="#" class="btn-shadow mt-6">view details</a>
+
+        </div>
+
+        <div class="">
+            <div id="sealsOverview"></div>
+        </div>
+
+    </div>
+    <!-- end body -->
+
+</div>
+    <!-- end Sales Overview -->
+
+    <!-- start numbers -->
+    <div class="grid grid-cols-5 gap-6 xl:grid-cols-2">
+
+    <!-- card -->
+    <div class="card mt-6">
+        <div class="card-body flex items-center">
+
+            <div class="px-3 py-2 rounded bg-indigo-600 text-white mr-3">
+                <i class="fad fa-wallet"></i>
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="font-semibold"><span class="num-2"></span> Sales</h1>
+                <p class="text-xs"><span class="num-2"></span> payments</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- end card -->
+
+    <!-- card -->
+    <div class="card mt-6">
+        <div class="card-body flex items-center">
+
+            <div class="px-3 py-2 rounded bg-green-600 text-white mr-3">
+                <i class="fad fa-shopping-cart"></i>
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="font-semibold"><span class="num-2"></span> Orders</h1>
+                <p class="text-xs"><span class="num-2"></span> items</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- end card -->
+
+    <!-- card -->
+    <div class="card mt-6 xl:mt-1">
+        <div class="card-body flex items-center">
+
+            <div class="px-3 py-2 rounded bg-yellow-600 text-white mr-3">
+                <i class="fad fa-blog"></i>
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="font-semibold"><span class="num-2"></span> posts</h1>
+                <p class="text-xs"><span class="num-2"></span> active</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- end card -->
+
+    <!-- card -->
+    <div class="card mt-6 xl:mt-1">
+        <div class="card-body flex items-center">
+
+            <div class="px-3 py-2 rounded bg-red-600 text-white mr-3">
+                <i class="fad fa-comments"></i>
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="font-semibold"><span class="num-2"></span> comments</h1>
+                <p class="text-xs"><span class="num-2"></span> approved</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- end card -->
+
+    <!-- card -->
+    <div class="card mt-6 xl:mt-1 xl:col-span-2">
+        <div class="card-body flex items-center">
+
+            <div class="px-3 py-2 rounded bg-pink-600 text-white mr-3">
+                <i class="fad fa-user"></i>
+            </div>
+
+            <div class="flex flex-col">
+                <h1 class="font-semibold"><span class="num-2"></span> memebrs</h1>
+                <p class="text-xs"><span class="num-2"></span> online</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- end card -->
+
+</div>
+    <!-- end nmbers -->
+
+    <!-- start quick Info -->
+    <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
+
+
+    <!-- Browser Stats -->
+    <div class="card">
+        <div class="card-header">Browser Stats</div>
+
+        <!-- brawser -->
+        <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b">
+            <div class="flex items-center">
+                <i class="fab fa-chrome mr-4"></i>
+                <h1>google chrome</h1>
+            </div>
+            <div>
+                <span class="num-2"></span>%
+            </div>
+        </div>
+        <!-- end brawser -->
+
+        <!-- brawser -->
+        <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b">
+            <div class="flex items-center">
+                <i class="fab fa-firefox mr-4"></i>
+                <h1>firefox</h1>
+            </div>
+            <div>
+                <span class="num-2"></span>%
+            </div>
+        </div>
+        <!-- end brawser -->
+
+        <!-- brawser -->
+        <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b">
+            <div class="flex items-center">
+                <i class="fab fa-internet-explorer mr-4"></i>
+                <h1>internet explorer</h1>
+            </div>
+            <div>
+                <span class="num-2"></span>%
+            </div>
+        </div>
+        <!-- end brawser -->
+
+        <!-- brawser -->
+        <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b-0">
+            <div class="flex items-center">
+                <i class="fab fa-safari mr-4"></i>
+                <h1>safari</h1>
+            </div>
+            <div>
+                <span class="num-2"></span>%
+            </div>
+        </div>
+        <!-- end brawser -->
+
+    </div>
+    <!-- end Browser Stats -->
+
+    <!-- Start Recent Sales -->
+    <div class="card col-span-2 xl:col-span-1">
+        <div class="card-header">Recent Sales</div>
+
+        <table class="table-auto w-full text-left">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 border-r"></th>
+                    <th class="px-4 py-2 border-r">product</th>
+                    <th class="px-4 py-2 border-r">price</th>
+                    <th class="px-4 py-2">date</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600">
+
+                <tr>
+                    <td class="border border-l-0 px-4 py-2 text-center text-green-500"><i class="fad fa-circle"></i></td>
+                    <td class="border border-l-0 px-4 py-2">Lightning to USB-C Adapter Lightning.</td>
+                    <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
+                </tr>
+                <tr>
+                    <td class="border border-l-0 px-4 py-2 text-center text-yellow-500"><i class="fad fa-circle"></i></td>
+                    <td class="border border-l-0 px-4 py-2">Apple iPhone 8.</td>
+                    <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
+                </tr>
+                <tr>
+                    <td class="border border-l-0 px-4 py-2 text-center text-green-500"><i class="fad fa-circle"></i></td>
+                    <td class="border border-l-0 px-4 py-2">Apple MacBook Pro.</td>
+                    <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
+                </tr>
+                <tr>
+                    <td class="border border-l-0 px-4 py-2 text-center text-red-500"><i class="fad fa-circle"></i></td>
+                    <td class="border border-l-0 px-4 py-2">Samsung Galaxy S9.</td>
+                    <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
+                </tr>
+                <tr>
+                    <td class="border border-l-0 px-4 py-2 text-center text-yellow-500"><i class="fad fa-circle"></i></td>
+                    <td class="border border-l-0 px-4 py-2">Samsung Galaxy S8 256GB.</td>
+                    <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
+                </tr>
+                <tr>
+                    <td class="border border-l-0 border-b-0 px-4 py-2 text-center text-green-500"><i class="fad fa-circle"></i></td>
+                    <td class="border border-l-0 border-b-0 px-4 py-2">apple watch.</td>
+                    <td class="border border-l-0 border-b-0 px-4 py-2">$<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-b-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- End Recent Sales -->
+
+
+</div>
+    <!-- end quick Info -->
+
+
+  </div>
+  <!-- end content -->
+
+</div>
+<!-- end wrapper -->
+
+<!-- script -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="doctor/js/scripts.js"></script>
+<!-- end script -->
+
 </body>
-
 </html>

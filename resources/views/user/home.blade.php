@@ -90,7 +90,7 @@
         <a class="navbar-brand" href="#"><span class="text-primary">Dr</span> Facelook</a>
 
         <form action="#">
-          <div class="input-group input-navbar">
+          <div class="input-group input-navbar highlight-on-hover">
             <div class="input-group-prepend">
               <span class="input-group-text" id="icon-addon1"><span class="mai-search"></span></span>
             </div>
@@ -107,7 +107,7 @@
 
 
 
-
+<li></li>
           <ul class="navbar-nav ml-auto">
 
 
@@ -119,40 +119,64 @@
               <a class="nav-link highlight-on-hover" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link highlight-on-hover" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link highlight-on-hover" href="doctors.html">Doctors</a>
+              <a class="nav-link highlight-on-hover" href="{{route('doctors')}}">Doctors</a>
             </li>
             <li class="nav-item">
               <a class="nav-link highlight-on-hover" href="blog.html">News</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link highlight-on-hover" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link highlight-on-hover" href="contact.html">Contact</a>
             </li>
 
-            @if (Auth::check())
-            {{Auth::user()->name}}&nbsp;&nbsp;
 
-    <form action="{{ route('logout') }}" method="POST" style="display: inline-block;">
-        @csrf
-        <button class="btn btn-primary" type="submit">Logout</button>
-    </form>
+            <li class="nav-item">
+               <a class="nav-link">
+                     @if (Auth::check())
+                       <img src="https://cdn-icons-png.flaticon.com/512/3972/3972726.png" height="45px" width="45px">  {{Auth::user()->name}}&nbsp;&nbsp;
+               </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" > <form action="{{ route('logout') }}" method="POST" style="display: inline-block;">
+                @csrf
+                <button style="background-color:#00D9A5; color:white; border-radius:10px;" class="btn btn highlight-on-hover" type="submit">Logout</button>
+            </form> </a>
+            </li>
+
+
+
 @endif
 
 @else
 
-            <div class="navbar-nav">
+            {{-- <div class="navbar-nav">
     <ul class="navbar-nav">
         <li class="nav-item mt-2">
-            <a class="btn btn-primary ml-lg-3" href="{{ route('login') }}">Login</a>
+            <a class="btn btn-primary ml-lg-3 highlight-on-hover" href="{{ route('login') }}">Login</a>
         </li>
 
         <li class="nav-item mt-2">
-            <a class="btn btn-primary ml-lg-3" href="{{ route('register') }}">Register</a>
+            <a class="btn btn-primary ml-lg-3 highlight-on-hover" href="{{ route('register') }}">Register</a>
         </li>
     </ul>
-</div>
+</div> --}}
+
+<li class="nav-item">
+    <a class="nav-link" > <form action="{{ route('login') }}" style="display: inline-block;">
+      @csrf
+      <button style="background-color:#00D9A5; color:white; border-radius:10px;" class="btn btn highlight-on-hover" type="submit">Login</button>
+  </form> </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" > <form action="{{ route('register') }}" style="display: inline-block;">
+      @csrf
+      <button style="background-color:#00D9A5; color:white; border-radius:10px;" class="btn btn highlight-on-hover" type="submit">Register</button>
+  </form> </a>
+  </li>
 
     @endauth
     @endif
@@ -168,7 +192,7 @@
       <div class="container text-center wow zoomIn">
         <span class="subhead">Let's make your life happier</span>
         <h1 class="display-4">Healthy Living</h1>
-        <a href="#consult-section" class="btn btn-primary">Let's Consult</a>
+        <a href="#consult-section" class="btn btn-primary highlight-on-hover">Let's Consult</a>
       </div>
     </div>
   </div>
@@ -212,7 +236,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 py-3 wow fadeInUp">
             <h1>Welcome to Your Health <br> Center</h1>
-            <p class="text-grey mb-4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Accusantium aperiam earum ipsa eius, inventore nemo labore eaque porro consequatur ex aspernatur. Explicabo, excepturi accusantium! Placeat voluptates esse ut optio facilis!</p>
+            <p class="text-grey mb-4">Welcome to Dr Facelook – Your One-Stop Health Companion! 🌟 Experience hassle-free appointment management with our web-based application. Connect with specialized doctors through chat or video calls for personalized consultations. After your consultation, conveniently purchase prescribed medicines directly from our platform. Your health, our priority – Dr Facelook, where care meets convenience! 💻👩‍⚕️💊 #HealthcareMadeEasy #DrFacelook #VirtualHealthcare</p>
             <a href="about.html" class="btn btn-primary">Learn More</a>
           </div>
           <div class="col-lg-6 wow fadeInRight" data-wow-delay="400ms">
@@ -238,7 +262,7 @@
               <img src="../assets/img/doctors/doctor_1.jpg" alt="">
               <div class="meta">
                 <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                <a href="/chatify/4"><span class="mai-chatbubbles-outline"></span></a>
               </div>
             </div>
             <div class="body">

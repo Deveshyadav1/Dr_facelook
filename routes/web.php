@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
-
-
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\GoogleAuthController;
 
@@ -36,6 +33,8 @@ Route::post('/submit-appointment', [HomeController::class, 'submit']);
 /*Route::post('/create-appointment', 'DoctorController@create_appointment')->name('create.appointment');*/
 
 Route::post('/create-appointment', [DoctorController::class,'create_appointment'])->name('create.appointment');
+
+Route::get('/doctors',[DoctorController::class,'doctors'])->name('doctors');
 
 
 

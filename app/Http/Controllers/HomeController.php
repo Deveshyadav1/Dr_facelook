@@ -23,11 +23,12 @@ class HomeController extends Controller
             }
                elseif (Auth::user()->usertype=='1') {
 
+                    // $_SESSION['active_doctor'] = 1;
                     return view('doctor.home');
             }
             else
             {
-                return view('admin.home');
+                // return Redirect::to(route('/admin'));   Reserved For Sub admin
             }
 
         }
@@ -37,11 +38,12 @@ class HomeController extends Controller
         }
     }
 
-
-
     public function index()
     {
-        $doctors = User::where('usertype', 1)->get();
+        $doctors = User::select('*')
+        ->join('doctors', 'users.id', '=', 'doctors.user_id')
+        ->select('users.*', 'doctors.specialization','doctors.user_id', 'doctors.qualification', 'doctors.experience')
+        ->get();
 
       return view('user.home',['doctors' => $doctors]);
     }
@@ -57,6 +59,10 @@ class HomeController extends Controller
 
         // Return a response (you can customize this based on your needs)
         return response()->json(['message' => 'Appointment Booked successfully']);
+    }
+
+    public function news(){
+        return view('user.news');
     }
 
 

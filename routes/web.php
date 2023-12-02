@@ -34,6 +34,8 @@ Route::post('/submit-appointment', [HomeController::class, 'submit']);
 
 Route::post('/create-appointment', [DoctorController::class,'create_appointment'])->name('create.appointment');
 
+Route::get('/news', [HomeController::class,'news'])->name('news');
+
 Route::get('/doctors',[DoctorController::class,'doctors'])->name('doctors');
 
 

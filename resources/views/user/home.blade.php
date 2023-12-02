@@ -28,6 +28,8 @@
 
   <link rel="stylesheet" href="../assets/css/theme.css">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 
   <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -72,8 +74,24 @@
     opacity: 1; /* Make the gradient overlay visible on hover */
 }
 
-
 </style>
+
+
+
+
+<style>
+    /* .toastify {
+      width: 300px;
+      border-radius: 10px;
+
+
+    } */
+
+    .toastify-progress {
+      height: 5px;
+      border-radius: 10px;
+    }
+  </style>
 
 
 </head>
@@ -122,7 +140,7 @@
               <a class="nav-link highlight-on-hover" href="{{route('doctors')}}">Doctors</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link highlight-on-hover" href="blog.html">News</a>
+              <a class="nav-link highlight-on-hover" href="{{route('news')}}">News</a>
             </li>
             <li class="nav-item">
               <a class="nav-link highlight-on-hover" href="about.html">About Us</a>
@@ -198,6 +216,8 @@
   </div>
 
 
+
+
   <div class="bg-light">
     <div class="page-section py-3 mt-md-n5 custom-index">
       <div class="container">
@@ -207,7 +227,7 @@
               <div class="circle-shape bg-secondary text-white">
                 <span class="mai-chatbubbles-outline"></span>
               </div>
-              <p><span>Chat</span> with  Doctors</p>
+              <p><span>Chat</span> Room</p>
             </div>
           </a>
           </div>
@@ -216,7 +236,7 @@
               <div class="circle-shape bg-primary text-white">
                 <span class="mai-shield-checkmark"></span>
               </div>
-              <p><span>Dr</span>-Facelook Protection</p>
+              <p><span>Dr</span>-Facelook AI Protection</p>
             </div>
           </div>
           <div class="col-md-4 py-3 py-md-0 ">
@@ -250,87 +270,65 @@
   </div> <!-- .bg-light -->
 
 
+<?php
+use App\Models\User;
+
+$users = User::select('*')
+                ->join('doctors', 'users.id', '=', 'doctors.user_id')
+                ->select('users.*', 'doctors.specialization','doctors.user_id', 'doctors.qualification', 'doctors.experience')
+                ->get()->toArray();
+
+// echo"<pre>";print_r($users);die();
+
+?>
+
 
   <div class="page-section">
     <div class="container">
       <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
 
+
+
+
       <div class="owl-carousel wow fadeInUp" id="doctorSlideshow">
+
+        @foreach($users as $user)
+
         <div class="item">
           <div class="card-doctor">
             <div class="header">
-              <img src="../assets/img/doctors/doctor_1.jpg" alt="">
+              <img src="{{$user['profile_photo_url']}}" class="profile_photo_url" alt="">
               <div class="meta">
                 <a href="#"><span class="mai-call"></span></a>
-                <a href="/chatify/4"><span class="mai-chatbubbles-outline"></span></a>
+                <a href="/chatify/{{$user['user_id']}}"><span class="mai-chatbubbles-outline"></span></a>
               </div>
             </div>
             <div class="body">
-              <p class="text-xl mb-0">Dr. Stein Albert</p>
-              <span class="text-sm text-grey">Cardiology</span>
+              <p class="text-xl mb-1">{{$user['name']}}</p>
+
+              <span style="display: flex; align-items: center;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP147-W6enixCvFEGGy7R_m5nta86B8Y0oS4w8kHwqlRRk9xUYG-2x26YvFACR2K-3LaI&usqp=CAU" alt="Image" style="max-width: 14%; height: auto; border-radius: 8px; margin-right: 5px;">
+                <span class="text-sm text-grey">{{$user['specialization']}}</span>
+              </span>
+
+              <span style="display: flex; align-items: center;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRLuRKOdtlptoZOvcfYoFP-RZWCn0er2WN2g&usqp=CAU" alt="Image" style="max-width: 14%; height: auto; border-radius: 8px; margin-right: 5px;">
+                <span class="text-sm text-grey">{{$user['qualification']}}</span>
+              </span>
+
+
+              {{-- <img src="https://www.freeiconspng.com/uploads/5-star-icon-14.jpeg" alt="" style="max-width: 28%; height: auto; border-radius: 8px;; margin-right: 5px;"> --}}
+
+
+
+
+               {{-- <img height="3x" width="4px" src="https://static.vecteezy.com/system/resources/previews/022/369/428/non_2x/double-degree-icon-style-vector.jpg"> --}}
             </div>
           </div>
         </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="../assets/img/doctors/doctor_2.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="/chatify/1"><span class="mai-logo-whatsapp"> </span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Alexa Melvin</p>
-              <span class="text-sm text-grey">Dental</span>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="../assets/img/doctors/doctor_3.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-              <span class="text-sm text-grey">General Health</span>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="../assets/img/doctors/doctor_3.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-              <span class="text-sm text-grey">General Health</span>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
-              <img src="../assets/img/doctors/doctor_3.jpg" alt="">
-              <div class="meta">
-                <a href="#"><span class="mai-call"></span></a>
-                <a href="#"><span class="mai-logo-whatsapp"></span></a>
-              </div>
-            </div>
-            <div class="body">
-              <p class="text-xl mb-0">Dr. Rebecca Steffany</p>
-              <span class="text-sm text-grey">General Health</span>
-            </div>
-          </div>
-        </div>
+
+        @endforeach
+
       </div>
     </div>
   </div>
@@ -615,6 +613,8 @@
 
 
 
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 
 
@@ -628,6 +628,97 @@
 <script src="../assets/vendor/wow/wow.min.js"></script>
 
 <script src="../assets/js/theme.js"></script>
+
+{{-- ====================================================== Get Current location and show toast ===================================================== --}}
+
+@if(Route::has('login'))
+
+@auth
+
+<script>
+    // Variable to store the current location
+    let currentLocation = null;
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        showToast("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      if (!currentLocation) {
+        // Page is reloading, show initial toast
+        showInitialToast(latitude, longitude);
+      } else if (currentLocation.latitude !== latitude || currentLocation.longitude !== longitude) {
+        // Location has changed, show update toast
+        showUpdateToast(latitude, longitude);
+      }
+
+      // Update the current location
+      currentLocation = { latitude, longitude };
+    }
+
+    function showError(error) {
+      let errorMessage = "";
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorMessage = "User denied the request for Geolocation.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          errorMessage = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          errorMessage = "The request to get user location timed out.";
+          break;
+        case error.UNKNOWN_ERROR:
+          errorMessage = "An unknown error occurred.";
+          break;
+      }
+      showToast(errorMessage);
+    }
+
+    function showInitialToast(latitude, longitude) {
+      showToast(`Welcome! You are live in:.${latitude}, ${longitude}`);
+    }
+
+    function showUpdateToast(latitude, longitude) {
+      showToast(`Location Updated! Your new location is:<br>${latitude}, ${longitude}`);
+    }
+
+    function showToast(message) {
+  Toastify({
+    text: message,
+    duration: 3500, // Reduced to 3.5 seconds
+    close: true,
+    gravity: "top",
+    position: "right",
+    backgroundColor: "linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))", // Added transparency
+    stopOnFocus: true,
+    className: "toastify",
+    progress: true,
+  }).showToast();
+}
+
+    // Check login status and get location only when the page reloads
+    getLocation();
+  </script>
+
+@endif
+
+@else
+
+
+
+
+@endauth
+
+
+{{-- ====================================================== Get Current location and show toast End ===================================================== --}}
 
 
 
@@ -699,6 +790,8 @@
     });
   });
 </script>
+
+
 
 
 

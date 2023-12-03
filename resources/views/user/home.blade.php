@@ -18,6 +18,8 @@
 
   <title>Dr Facelook</title>
 
+
+  <link rel="stylesheet" href="../assets/css/home_style.css">
   <link rel="stylesheet" href="../assets/css/maicons.css">
 
   <link rel="stylesheet" href="../assets/css/bootstrap.css">
@@ -41,64 +43,16 @@
 <!-- Include CSRF token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<style>
-
- /* Define a CSS class for a beautiful highlighting effect on hover */
-.highlight-on-hover {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-}
-
-.highlight-on-hover:hover {
-    transform: scale(1.05); /* Enlarge the element on hover */
-    box-shadow: 0 5px 15px #00D9A5; /* Add a subtle shadow */
-    border-radius: 10px;
-}
-
-.highlight-on-hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(#00D9A5); /* Gradient overlay */
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-    z-index: -1;
-    border-radius: 50px;
-}
-
-.highlight-on-hover:hover::before {
-    opacity: 1; /* Make the gradient overlay visible on hover */
-}
-
-</style>
-
-
-
-
-<style>
-    /* .toastify {
-      width: 300px;
-      border-radius: 10px;
-
-
-    } */
-
-    .toastify-progress {
-      height: 5px;
-      border-radius: 10px;
-    }
-  </style>
 
 
 </head>
 <body>
 
+
+
   <!-- Back to top button -->
   <div class="back-to-top"></div>
+
 
   <header>
 
@@ -223,22 +177,29 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-4 py-3 py-md-0">
-          <a href="/chatify"> <div style="color:black;" class="card-service wow fadeInUp highlight-on-hover">
-              <div class="circle-shape bg-secondary text-white">
+          <a href="/chatify"> <div style="color:black;" class="card-service wow fadeInUp highlight-on-hover" >
+              <div class="circle-shape bg-secondary text-white" >
                 <span class="mai-chatbubbles-outline"></span>
               </div>
               <p><span>Chat</span> Room</p>
             </div>
           </a>
           </div>
+
           <div class="col-md-4 py-3 py-md-0">
-            <div class="card-service wow fadeInUp highlight-on-hover">
-              <div class="circle-shape bg-primary text-white">
-                <span class="mai-shield-checkmark"></span>
-              </div>
-              <p><span>Dr</span>-Facelook AI Protection</p>
+            <div class="card-service wow fadeInUp highlight-on-hover" >
+                <div class="circle-shape bg-primary text-white">
+                    <span class="mai-shield-checkmark"></span>
+                </div>
+                <p><span>Dr</span>-Facelook AI Protection</p>
             </div>
-          </div>
+        </div>
+
+
+
+
+
+
           <div class="col-md-4 py-3 py-md-0 ">
             <div class="card-service wow fadeInUp highlight-on-hover">
               <div class="circle-shape bg-accent text-white ">
@@ -427,6 +388,8 @@ $users = User::select('*')
 
 <div class="page-section" id="consult-section">
     <div class="container">
+
+      <center> <img src="https://cdn.dribbble.com/users/2517905/screenshots/8140964/media/7d5e2f8977c3fa786a8de673abca6084.gif" height="36%" width="36%"> </center>
       <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
 
@@ -434,19 +397,19 @@ $users = User::select('*')
         <div class="row mt-5 ">
 
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
-            <input type="text" class="form-control" id="name" placeholder="Full name" value="{{Auth::User()->name}}" >
+            <input type="text" class="form-control highlight-on-hover" id="name" placeholder="Full name *" value="{{Auth::User()->name}}" >
           </div>
 
           <div class="col-12 col-sm-6 py-2 wow fadeInRight">
-            <input type="text" id="email" class="form-control" placeholder="Email address.." value="{{Auth::user()->email}}">
+            <input type="text" id="email" class="form-control highlight-on-hover" placeholder="Email address *" value="{{Auth::user()->email}}">
           </div>
 
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
-            <input type="date" class="form-control" id="myDateInput" value="<?php echo $currentDate; ?>">
+            <input type="date" class="form-control highlight-on-hover" id="myDateInput" value="<?php echo $currentDate; ?>" placeholder="Date *">
           </div>
 
-          <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
-            <select name="departement" id="checkup" class="custom-select">
+          <div class="col-12 col-sm-6 py-2 wow fadeInRight " data-wow-delay="300ms">
+            <select name="departement" id="checkup" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
               <option value="general">General Health</option>
               <option value="cardiology">Cardiology</option>
               <option value="dental">Dental</option>
@@ -456,7 +419,7 @@ $users = User::select('*')
           </div>
 
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-            <input type="text" id="number" class="form-control" placeholder="Number..">
+            <input type="text" id="number" class="form-control highlight-on-hover" placeholder="Number *">
           </div>
 
           <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
@@ -464,12 +427,12 @@ $users = User::select('*')
 
 
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-            <textarea name="message" id="message" class="form-control" rows="6" placeholder="Enter message.."></textarea>
+            <textarea name="message" id="message" class="form-control highlight-on-hover" rows="6" placeholder="Enter message "></textarea>
           </div>
 
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
+        <button type="submit" class="btn btn-primary mt-3 wow zoomIn highlight-on-hover">Submit Request</button>
       </form>
     </div>
   </div>
@@ -486,6 +449,7 @@ $users = User::select('*')
 
       <div class="page-section" id="consult-section">
     <div class="container">
+        <center> <img src="https://cdn.dribbble.com/users/2517905/screenshots/8140964/media/7d5e2f8977c3fa786a8de673abca6084.gif" height="36%" width="36%"> </center>
       <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
 
@@ -493,19 +457,19 @@ $users = User::select('*')
         <div class="row mt-5 ">
 
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
-            <input type="text" class="form-control" id="name" placeholder="Full name" value="" >
+            <input type="text" class="form-control highlight-on-hover" id="name" placeholder="Full name *" value="" >
           </div>
 
           <div class="col-12 col-sm-6 py-2 wow fadeInRight">
-            <input type="text" id="email" class="form-control" placeholder="Email address.." value="">
+            <input type="text" id="email" class="form-control highlight-on-hover" placeholder="Email address *" value="">
           </div>
 
           <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
-            <input type="date" class="form-control" id="myDateInput" value="">
+            <input type="date" class="form-control highlight-on-hover" id="myDateInput" value="" placeholder="Date *">
           </div>
 
           <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
-            <select name="departement" id="checkup" class="custom-select">
+            <select name="departement" id="checkup" class="custom-select highlight-on-hover">
               <option value="general">General Health</option>
               <option value="cardiology">Cardiology</option>
               <option value="dental">Dental</option>
@@ -515,7 +479,7 @@ $users = User::select('*')
           </div>
 
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-            <input type="text" id="number" class="form-control" placeholder="Number..">
+            <input type="text" id="number" class="form-control highlight-on-hover" placeholder="Number *">
           </div>
 
           <input type="hidden" name="user_id" id="user_id" value="">
@@ -523,12 +487,12 @@ $users = User::select('*')
 
 
           <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-            <textarea name="message" id="message" class="form-control" rows="6" placeholder="Enter message.."></textarea>
+            <textarea name="message" id="message" class="form-control highlight-on-hover" rows="6" placeholder="Enter message"></textarea>
           </div>
 
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
+        <button type="submit" class="btn btn-primary mt-3 wow zoomIn highlight-on-hover">Submit Request</button>
       </form>
     </div>
   </div>
@@ -556,7 +520,7 @@ $users = User::select('*')
     </div>
   </div> <!-- .banner-home -->
 
-  <footer class="page-footer">
+  {{-- <footer class="page-footer">
     <div class="container">
       <div class="row px-md-3">
         <div class="col-sm-6 col-lg-3 py-3">
@@ -604,9 +568,9 @@ $users = User::select('*')
 
       <hr>
 
-      <p id="copyright">Copyright &copy; 2020 <a href="https://macodeid.com/" target="_blank">MACode ID</a>. All right reserved</p>
+      <p id="copyright">Copyright &copy; 2020 <a href="DrFacelook.com" target="_blank">Dr. Facelook</a>. All right reserved</p>
     </div>
-  </footer>
+  </footer> --}}
 
 
 
@@ -743,7 +707,7 @@ $users = User::select('*')
       if (!formData.name || !formData.email || !formData.date || !formData.department || !formData.number) {
         // Show an error toast
         Toastify({
-          text: 'Validation failed: All fields must be filled.',
+          text: 'Validation failed: Please fill * required fields.',
           duration: 3000,
           close: true,
           gravity: 'top',

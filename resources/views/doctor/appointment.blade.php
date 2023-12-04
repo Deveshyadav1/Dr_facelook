@@ -1,543 +1,475 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-  <!-- Include Bootstrap CSS (replace the URL with the actual path) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- Include FontAwesome CSS (replace the URL with the actual path) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
-    <!-- Include jQuery (required for date and time picker) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Include Bootstrap JavaScript (required for modals) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Include a date and time picker library (e.g., Tempus Dominus) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
-
-
-    <meta charset="utf-8">
-    <title>Appointments</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="doctor/img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="doctor/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="doctor/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="doctor/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="doctor/css/style.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="doctor/img/fav.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
+  <link rel="stylesheet" type="text/css" href="doctor/css/style.css">
+  <title>Welcome To Dr Facelook</title>
 </head>
-
-<body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+<body class="bg-gray-100">
 
 
-        <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-light navbar-light">
-                <!-- <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i></h3>
-                </a> -->
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
-                    <a href="/home">
-                    <div class="ms-3">
-                        <h6 class="mb-0">{{Auth::user()->name}}</h6>
-                        <span>Doctor</span>
-                    </div>
-                </a>
-                </div>
-                <div  style="background: transparent;" class="navbar-nav w-100">
-                    <a href="/home" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Appointment</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/appointment" class="dropdown-item active">Add Appointment</a>
-                            <a href="/appointment_status" class="dropdown-item">Appointment Status</a>
-                            <a href="/appointment_type" class="dropdown-item">Appointment Types</a>
-                        </div>
-                    </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <!-- Sidebar End -->
+<!-- start navbar -->
+<div class="md:fixed md:w-full md:top-0 md:z-20 flex flex-row flex-wrap items-center bg-white p-6 border-b border-gray-300">
 
+    <!-- logo -->
+    <div class="flex-none w-56 flex flex-row items-center">
+      <img src="doctor/img/logo.png" class="w-10 flex-none">
+      <strong class="capitalize ml-1 flex-1">Dr Facelook</strong>
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
-                
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div  class="nav-item dropdown">
-                        <a  href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Message</span>
-                        </a>
-                        <div  class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a  href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all message</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="doctor/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">{{Auth::user()->name}}</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{{ route('profile.show') }}" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="{{ route('logout') }}" class="dropdown-item"
-   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <!-- Navbar End -->
-
-
-            <!-- Button Start -->
-          <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">  
-           <div class="col-12">
-
-
-<style>
-
- .video-conference-btn {
-            font-size: 24px; /* Adjust the icon size as needed */
-            border-radius: 50%; /* Make the button round */
-            width: 60px; /* Set the button width */
-            height: 60px; /* Set the button height */
-        }
-  </style>
-
-                        <div  style="background-color: #485461; transition-property: 100;" class=" rounded h-100 p-2">
-                            
-                           <button class="btn btn-primary video-conference-btn" data-toggle="modal" data-target="#videoConferenceModal">
-    <i class="fas fa-video"></i>
-</button><i class="fa fa-plus"></i>
-
-                         <div class="table-responsive">
-                                
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- Button End -->
-
-<!-- ================================== Video confrencing model ========================== -->
-
-<div class="modal fade" id="videoConferenceModal" tabindex="-1" role="dialog" aria-labelledby="videoConferenceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="videoConferenceModalLabel">Video Conference Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Form for Video Conference Details -->
-                <form id="appointment-form">
-                    <div class="form-group">
-                        <label for="conferenceTitle">Title</label>
-                        <input type="text" class="form-control" id="conferenceTitle" placeholder="Enter title">
-                    </div>
-                    <div class="form-group">
-                        <label for="dateTimePicker">Date and Time</label>
-                        <div class="input-group date" id="dateTimePicker" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#dateTimePicker"/>
-                            <div class="input-group-append" data-target="#dateTimePicker" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- You can add user profiles selection here -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="schedule-button">Schedule</button>
-            </div>
-        </div>
+      <button id="sliderBtn" class="flex-none text-right text-gray-900 hidden md:block">
+        <i class="fad fa-list-ul"></i>
+      </button>
     </div>
-</div>
+    <!-- end logo -->
 
-<!-- Initialize date and time picker -->
-<script>
-    $('#dateTimePicker').datetimepicker();
-</script>
+    <!-- navbar content toggle -->
+    <button id="navbarToggle" class="hidden md:block md:fixed right-0 mr-6">
+      <i class="fad fa-chevron-double-down"></i>
+    </button>
+    <!-- end navbar content toggle -->
 
+    <!-- navbar content -->
+    <div id="navbar" class="animated md:hidden md:fixed md:top-0 md:w-full md:left-0 md:mt-16 md:border-t md:border-b md:border-gray-200 md:p-10 md:bg-white flex-1 pl-3 flex flex-row flex-wrap justify-between items-center md:flex-col md:items-center">
+      <!-- left -->
+      <div class="text-gray-600 md:w-full md:flex md:flex-row md:justify-evenly md:pb-10 md:mb-10 md:border-b md:border-gray-200">
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-envelope-open-text"></i></a>
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-comments-alt"></i></a>
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-check-circle"></i></a>
+        <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class="fad fa-calendar-exclamation"></i></a>
+      </div>
+      <!-- end left -->
 
+      <!-- right -->
+      <div class="flex flex-row-reverse items-center">
 
+        <!-- user -->
+        <div class="dropdown relative md:static">
 
-<div class="container-fluid pt-0 px-4">
-                <div class="row g-2">
-                    
-                    <div class="col-sm-12 col-xl-6">
+          <button class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
+            <div class="w-8 h-8 overflow-hidden rounded-full">
+              <img class="w-full h-full object-cover" src="doctor/img/user.svg" >
+            </div>
 
-                    </div>
-   
+            <div class="ml-2 capitalize flex ">
+              <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{Auth::user()->name}}</h1>
+              <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
+            </div>
+          </button>
 
-<!-- <div class="col-12">
-    <div class="bg-light rounded h-100 p-4">
-        <h6 class="mb-4">Responsive Table</h6>
-        <div class="search-container">
-    <input type="text" id="search-input" placeholder="Search..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; float: right;">
-</div>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Date / Time</th>
-                        <th scope="col">Members</th>
-                        <th scope="col">Meeting ID</th>
-                        <th scope="col">created_at</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($appointments as $appointment)
-                        <tr>
-                            <th scope="row">{{ $appointment->id }}</th>
-                            <td>{{ $appointment->title }}</td>
-                            <td>{{ \Carbon\Carbon::parse($appointment->datetime)->format('j F Y') }} {{ \Carbon\Carbon::parse($appointment->datetime)->format('g:i A') }} </td>
-                            <td>{{ $appointment->members }}</td>
-                            <td>{{ $appointment->meet_id }}</td>
-                            <td>{{ $appointment->created_at }}</td>
-                            <td>{{ $appointment->status }}</td>
+          <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
 
-                            <td><button class="btn btn-primary m-2">Edit</button> </td>
-                            <td><button class="btn btn-danger m-2">Delete</button> </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+          <div class="text-gray-500 menu hidden md:mt-10 md:w-full rounded bg-white shadow-md absolute z-20 right-0 w-40 mt-5 py-2 animated faster">
+
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
+              <i class="fad fa-user-edit text-xs mr-1"></i>
+              edit my profile
+            </a>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
+              <i class="fad fa-inbox-in text-xs mr-1"></i>
+              my inbox
+            </a>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
+              <i class="fad fa-badge-check text-xs mr-1"></i>
+              tasks
+            </a>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="/chatify">
+              <i class="fad fa-comment-alt-dots text-xs mr-1"></i>
+              chats
+            </a>
+            <!-- end item -->
+
+            <hr>
+
+            <!-- item -->
+            <a href="{{ route('logout') }}" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">log out</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
+                    </a>
+            <!-- end item -->
+
+          </div>
         </div>
-    </div>
-</div>
-                </div>
-            </div> -->
+        <!-- end user -->
 
 
 
 
+        <!-- notifcation -->
+        <div class="dropdown relative mr-5 md:static">
 
+          <button class="text-gray-500 menu-btn p-0 m-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none transition-all ease-in-out duration-300">
+            <i class="fad fa-bells"></i>
+          </button>
 
-  <div class="container-fluid pt-4 px-2">
-                <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
-                    </div>
- 
- <div class="search-container">
-    <input type="text" id="search-input" placeholder="Search..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; float: right;">
-</div>
+          <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
 
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    
-                                    
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Date / Time</th>
-                                    <th scope="col">Patient</th>
-                                    
-                                    <th scope="col">created_at</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($appointments as $appointment)
-            
-                                <?php if($appointment->status==0)
-                                         {
-                                            
-                                            $status="scheduled";
-                                         }
-                                         elseif ($appointment->status==1) {
-                                          
-                                          $status="Completed";   
-                                          
-                                          /*$status = array('text' => 'Completed', 'color' => 'danger' );*/
-                                         }
-                                         elseif ($appointment->status==2) {
-                                             
-                                             $status="Ongoing";
-                                             /*$status = array('text' => 'Ongoing', 'color' => 'success' );*/
-                                         }
-                                         else
-                                         {
-
-                                         }
-                                  ?>
-
-                                <tr>
-                                    
-                                    <!-- <th scope="row">{{ $appointment->id }}</th> -->
-                                    <td>{{ $appointment->title }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($appointment->datetime)->format('j F Y') }} {{ \Carbon\Carbon::parse($appointment->datetime)->format('g:i A') }} </td>
-                                    <td>{{ $appointment->members }}</td>
-                                    <!-- <td>{{ $appointment->meet_id }}</td> -->
-                                    <td>{{ $appointment->created_at }}</td>
-                                    <td><button type="button" class="btn btn-info rounded-pill m-2"> <?php $status;/*$status['text'];*/ ?></button></td>
-                                    <td><button class="btn btn-danger m-2">Delete</button> </td> 
-                                    
-                                    
-                                </tr>
-                                  @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+          <div class="menu hidden rounded bg-white md:right-0 md:w-full shadow-md absolute z-20 right-0 w-84 mt-5 py-2 animated faster">
+            <!-- top -->
+            <div class="px-4 py-2 flex flex-row justify-between items-center capitalize font-semibold text-sm">
+              <h1>notifications</h1>
+              <div class="bg-teal-100 border border-teal-200 text-teal-500 text-xs rounded px-1">
+                <strong>5</strong>
+              </div>
             </div>
+            <hr>
+            <!-- end top -->
 
+            <!-- body -->
 
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
 
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-birthday-cake text-sm"></i>
+              </div>
 
-
-
-
-<!-- ======================================================================================= -->
-
-
-
-            <!-- Footer Start -->
-            <!-- <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Dr. Facelook</a>, All Right Reserved. 
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">poll..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
                 </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>4 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-user-circle text-sm"></i>
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">mohamed..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>78 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-images text-sm"></i>
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">new imag..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>65 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                <i class="fad fa-alarm-exclamation text-sm"></i>
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">time is up..</h1>
+                  <p class="text-xs text-gray-500">text here also</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>1 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <!-- end item -->
+
+
+            <!-- end body -->
+
+            <!-- bottom -->
+            <hr>
+            <div class="px-4 py-2 mt-2">
+              <a href="#" class="border border-gray-300 block text-center text-xs uppercase rounded p-1 hover:text-teal-500 transition-all ease-in-out duration-500">
+                view all
+              </a>
             </div>
-             Footer End 
-        </div> -->
-        <!-- Content End -->
+            <!-- end bottom -->
+          </div>
+        </div>
+        <!-- end notifcation -->
+
+        <!-- messages -->
+        <div class="dropdown relative mr-5 md:static">
+
+          <button class="text-gray-500 menu-btn p-0 m-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none transition-all ease-in-out duration-300">
+            <i class="fad fa-comments"></i>
+          </button>
+
+          <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
+
+          <div class="menu hidden md:w-full md:right-0 rounded bg-white shadow-md absolute z-20 right-0 w-84 mt-5 py-2 animated faster">
+            <!-- top -->
+            <div class="px-4 py-2 flex flex-row justify-between items-center capitalize font-semibold text-sm">
+              <h1>messages</h1>
+              <div class="bg-teal-100 border border-teal-200 text-teal-500 text-xs rounded px-1">
+                <strong>3</strong>
+              </div>
+            </div>
+            <hr>
+            <!-- end top -->
+
+            <!-- body -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                <img class="w-full h-full object-cover" src="doctor/img/user1.jpg" alt="">
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">mohamed said</h1>
+                  <p class="text-xs text-gray-500">yeah i know</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>4 min ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                <img class="w-full h-full object-cover" src="doctor/img/user2.jpg" alt="">
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">sull goldmen</h1>
+                  <p class="text-xs text-gray-500">for sure</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>1 day ago</p>
+                </div>
+              </div>
+
+            </a>
+            <hr>
+            <!-- end item -->
+
+            <!-- item -->
+            <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+
+              <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                <img class="w-full h-full object-cover" src="doctor/img/user3.jpg" alt="">
+              </div>
+
+              <div class="flex-1 flex flex-rowbg-green-100">
+                <div class="flex-1">
+                  <h1 class="text-sm font-semibold">mick</h1>
+                  <p class="text-xs text-gray-500">is typing ....</p>
+                </div>
+                <div class="text-right text-xs text-gray-500">
+                  <p>31 feb</p>
+                </div>
+              </div>
+
+            </a>
+            <!-- end item -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+            <!-- end body -->
+
+            <!-- bottom -->
+            <hr>
+            <div class="px-4 py-2 mt-2">
+              <a href="#" class="border border-gray-300 block text-center text-xs uppercase rounded p-1 hover:text-teal-500 transition-all ease-in-out duration-500">
+                view all
+              </a>
+            </div>
+            <!-- end bottom -->
+          </div>
+        </div>
+        <!-- end messages -->
+
+
+      </div>
+      <!-- end right -->
+    </div>
+    <!-- end navbar content -->
+
+  </div>
+<!-- end navbar -->
+
+
+<!-- strat wrapper -->
+<div class="h-screen flex flex-row flex-wrap">
+
+    <!-- start sidebar -->
+  <div id="sideBar" class="relative flex flex-col flex-wrap bg-white border-r border-gray-300 p-6 flex-none w-64 md:-ml-64 md:fixed md:top-0 md:z-30 md:h-screen md:shadow-xl animated faster">
+
+
+    <!-- sidebar content -->
+    <div class="flex flex-col">
+
+      <!-- sidebar toggle -->
+      <div class="text-right hidden md:block mb-4">
+        <button id="sideBarHideBtn">
+          <i class="fad fa-times-circle"></i>
+        </button>
+      </div>
+      <!-- end sidebar toggle -->
+
+      <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">homes</p>
+
+      <!-- link -->
+      <a href="/home" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-chart-pie text-xs mr-2"></i>
+        Analytics dashboard
+      </a>
+      <!-- end link -->
+
+
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p>
+
+
+      <a href="/appointment" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shield-check text-xs mr-2"></i>
+        Appointments
+      </a>
+
+
+
+
+      <!-- link -->
+      <a href="/chatify" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-comments text-xs mr-2"></i>
+        chat
+      </a>
+      <!-- end link -->
+
+
+
+      <!-- link -->
+      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-calendar-edit text-xs mr-2"></i>
+        calendar
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-file-invoice-dollar text-xs mr-2"></i>
+        invoice
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-folder-open text-xs mr-2"></i>
+        file manager
+      </a>
+      <!-- end link -->
+
+
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">UI Elements</p>
+
+
+
+    </div>
+    <!-- end sidebar content -->
+
+  </div>
+  <!-- end sidbar -->
+
+
+  {{--   -------------------------      Content    --------------------------------------------------------  --}}
+
+  <!-- strat content -->
+
+
+
+
+
+  <div class="bg-gray-100 flex-1 p-6 md:mt-16">
+
+    <!-- congrats & summary -->
+
+      <!-- congrats -->
+
+
+      <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1">
+
+        <div class="p-10">
+
+
+            {{-- =================================================================== --}}
+
+
+
+
+
+
+        </div>
+
+        <div class="">
+            <div id="sealsOverview"></div>
+        </div>
+
     </div>
 
 
-<!-- Include jQuery (if not already included) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Include toastr library (make sure it's included in your project) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
-
-<script>
-    $(document).ready(function() {
-        $("#search-input").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("table tbody tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
-        });
-    });
-</script>
-
-
-<script>
-    $(document).ready(function() {
-        $('#dateTimePicker').datetimepicker();
-
-        $('#schedule-button').click(function() {
-            var title = $('#conferenceTitle').val();
-            var datetime = $('#dateTimePicker input').val();
-            
-            // Get the CSRF token value from the meta tag
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            
-            // Include the CSRF token in the AJAX headers
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            });
-
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('create.appointment') }}",
-                data: {
-                    title: title,
-                    datetime: datetime
-                },
-                success: function(response) {
-                    // Handle the success response
-                    console.log(response);
-
-                    // Clear the input fields
-                    $('#conferenceTitle').val('');
-                    $('#dateTimePicker input').val('');
-
-                    // Close the modal
-                    $('#videoConferenceModal').modal('hide');
-
-                    // Show a success toast message
-                    toastr.success('Meeting created successfully', 'Success');
-                },
-                error: function(error) {
-                    // Handle the error response
-                    console.log(error);
-                    alert("Appointment scheduling failed.");
-                }
-            });
-        });
-    });
-</script>
 
 
 
 
 
 
+  <!-- end content -->
+</div>
+<!-- end wrapper -->
 
+<!-- script -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="doctor/js/scripts.js"></script>
+<!-- end script -->
 
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="doctor/lib/chart/chart.min.js"></script>
-    <script src="doctor/lib/easing/easing.min.js"></script>
-    <script src="doctor/lib/waypoints/waypoints.min.js"></script>
-    <script src="doctor/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="doctor/lib/tempusdominus/js/moment.min.js"></script>
-    <script src="doctor/lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="doctor/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="doctor/js/main.js"></script>
 </body>
-
 </html>

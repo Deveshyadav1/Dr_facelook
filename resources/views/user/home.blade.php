@@ -33,6 +33,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 
+
+
   <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -40,8 +42,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+
+
 <!-- Include CSRF token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 
 
@@ -143,12 +148,17 @@
   </form> </a>
   </li>
 
+
+
   <li class="nav-item">
     <a class="nav-link" > <form action="{{ route('register') }}" style="display: inline-block;">
       @csrf
       <button style="background-color:#00D9A5; color:white; border-radius:10px;" class="btn btn highlight-on-hover" type="submit">Register</button>
   </form> </a>
   </li>
+
+
+
 
     @endauth
     @endif
@@ -177,7 +187,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-4 py-3 py-md-0">
-          <a href="/chatify"> <div style="color:black;" class="card-service wow fadeInUp highlight-on-hover" >
+          <a href="/chatify"> <div style="color:black;" class="card-service wow fadeInUp highlight-on-hover">
               <div class="circle-shape bg-secondary text-white" >
                 <span class="mai-chatbubbles-outline"></span>
               </div>
@@ -246,7 +256,8 @@ $users = User::select('*')
 
   <div class="page-section">
     <div class="container">
-      <h1 class="text-center mb-5 wow fadeInUp">Our Doctors</h1>
+       <center><img src="https://i.pinimg.com/originals/37/1f/14/371f14644d93578b5b58df355a57024f.gif" height="25%" width="25%"></center>
+      <h1 class="text-center mb-4 wow fadeInUp">Our Doctors</h1>
 
 
 
@@ -482,6 +493,7 @@ $users = User::select('*')
             <input type="text" id="number" class="form-control highlight-on-hover" placeholder="Number *">
           </div>
 
+
           <input type="hidden" name="user_id" id="user_id" value="">
 
 
@@ -579,6 +591,10 @@ $users = User::select('*')
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 
 

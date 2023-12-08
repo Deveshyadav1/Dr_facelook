@@ -1,5 +1,14 @@
+ <?php
+   // Get the current date
+  $currentDate = date('Y-m-d');
+?>
+
+
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">   
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -189,6 +198,7 @@
 
 
 
+
   <div class="page-banner overlay-dark bg-image" style="background-image: url(../assets/img/bg_image_1.jpg);">
     <div class="banner-section">
       <div class="container text-center wow fadeInUp">
@@ -330,42 +340,125 @@
     </div> <!-- .container -->
   </div> <!-- .page-section -->
 
-  <div class="page-section">
-    <div class="container">
-      <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
-      <form class="main-form">
-        <div class="row mt-5 ">
-          <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
-            <input type="text" class="form-control" placeholder="Full name">
-          </div>
-          <div class="col-12 col-sm-6 py-2 wow fadeInRight">
-            <input type="text" class="form-control" placeholder="Email address..">
-          </div>
-          <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
-            <input type="date" class="form-control">
-          </div>
-          <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
-            <select name="departement" id="departement" class="custom-select">
-              <option value="general">General Health</option>
-              <option value="cardiology">Cardiology</option>
-              <option value="dental">Dental</option>
-              <option value="neurology">Neurology</option>
-              <option value="orthopaedics">Orthopaedics</option>
-            </select>
-          </div>
-          <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-            <input type="text" class="form-control" placeholder="Number..">
-          </div>
-          <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-            <textarea name="message" id="message" class="form-control" rows="6" placeholder="Enter message.."></textarea>
-          </div>
-        </div>
+  @if(Route::has('login'))
 
-        <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
-      </form>
-    </div> <!-- .container -->
-  </div> <!-- .page-section -->
+  @auth
+
+  <div class="page-section" id="consult-section">
+      <div class="container">
+
+        <center> <img src="https://cdn.dribbble.com/users/2517905/screenshots/8140964/media/7d5e2f8977c3fa786a8de673abca6084.gif" height="36%" width="36%"> </center>
+        <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
+
+
+        <form class="main-form">
+          <div class="row mt-5 ">
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+              <input type="text" class="form-control highlight-on-hover" id="name" placeholder="Full name *" value="{{Auth::User()->name}}" >
+            </div>
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInRight">
+              <input type="text" id="email" class="form-control highlight-on-hover" placeholder="Email address *" value="{{Auth::user()->email}}">
+            </div>
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
+              <input type="date" class="form-control highlight-on-hover" id="myDateInput" value="<?php echo $currentDate; ?>" placeholder="Date *">
+            </div>
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInRight " data-wow-delay="300ms">
+              <select name="departement" id="checkup" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
+                <option value="general">General Health</option>
+                <option value="cardiology">Cardiology</option>
+                <option value="dental">Dental</option>
+                <option value="neurology">Neurology</option>
+                <option value="orthopaedics">Orthopaedics</option>
+              </select>
+            </div>
+
+            <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+              <input type="text" id="number" class="form-control highlight-on-hover" placeholder="Number *">
+            </div>
+
+            <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
+
+
+
+            <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+              <textarea name="message" id="message" class="form-control highlight-on-hover" rows="6" placeholder="Enter message "></textarea>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-3 wow zoomIn highlight-on-hover">Submit Request</button>
+        </form>
+      </div>
+    </div>
+
+
+              @if (Auth::check())
+
+
+
+
+  @endif
+
+  @else
+
+        <div class="page-section" id="consult-section">
+      <div class="container">
+          <center> <img src="https://cdn.dribbble.com/users/2517905/screenshots/8140964/media/7d5e2f8977c3fa786a8de673abca6084.gif" height="36%" width="36%"> </center>
+        <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
+
+
+        <form class="main-form">
+          <div class="row mt-5 ">
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+              <input type="text" class="form-control highlight-on-hover" id="name" placeholder="Full name *" value="" >
+            </div>
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInRight">
+              <input type="text" id="email" class="form-control highlight-on-hover" placeholder="Email address *" value="">
+            </div>
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
+              <input type="date" class="form-control highlight-on-hover" id="myDateInput" value="" placeholder="Date *">
+            </div>
+
+            <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
+              <select name="departement" id="checkup" class="custom-select highlight-on-hover">
+                <option value="general">General Health</option>
+                <option value="cardiology">Cardiology</option>
+                <option value="dental">Dental</option>
+                <option value="neurology">Neurology</option>
+                <option value="orthopaedics">Orthopaedics</option>
+              </select>
+            </div>
+
+            <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+              <input type="text" id="number" class="form-control highlight-on-hover" placeholder="Number *">
+            </div>
+
+
+            <input type="hidden" name="user_id" id="user_id" value="">
+
+
+
+            <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+              <textarea name="message" id="message" class="form-control highlight-on-hover" rows="6" placeholder="Enter message"></textarea>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-3 wow zoomIn highlight-on-hover">Submit Request</button>
+        </form>
+      </div>
+    </div>
+
+      @endauth
+      @endif
 
 
   <div class="page-section banner-home bg-image" style="background-image: url(../assets/img/banner-pattern.svg);">
@@ -437,6 +530,8 @@
     </div>
   </footer>
 
+
+  
   <script>
     document.addEventListener('DOMContentLoaded', function () {
         const stars = document.querySelectorAll('.star');

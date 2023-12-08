@@ -5,9 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="doctor/img/fav.png" type="image/x-icon">
   <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <!-- Font Awesome  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Datatables CSS  -->
+  <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+  <!-- CSS  -->
+
   <link rel="stylesheet" type="text/css" href="doctor/css/style.css">
+  <link rel="stylesheet" href="doctor/css/style2.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
   <title>Welcome To Dr Facelook</title>
 </head>
+
+<style>
+     .table-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        padding: 8px;
+        font-size: 14px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .add-button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        color: #333;
+        padding: 8px;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 0 4px;
+    }
+</style>
+</style>
+
 <body class="bg-gray-100">
 
 
@@ -409,7 +473,7 @@
       <!-- end link -->
 
 
-      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">UI Elements</p>
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">......................................</p>
 
 
 
@@ -420,9 +484,92 @@
   <!-- end sidbar -->
 
 
-  {{--   -------------------------      Content    --------------------------------------------------------  --}}
 
-  <!-- strat content -->
+
+  {{-- ========================================================== Start Content ================================================================ --}}
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" style="width:600px;">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Appoientment </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      
+      <form method="POST" class="main-form">
+        
+        <div class="row mb-3">
+           <div class="col">
+             <!-- <label class="form-label">Name</label> -->
+             <input type="text" class="form-control" name="name" id="name" placeholder="Name *">
+           </div>
+          <div class="col">
+             <!-- <label class="form-label">Email</label> -->
+             <input type="email" class="form-control" id="email" name="email" placeholder="Email*">
+          </div>
+        </div>
+        
+        <div class="row mb-3">
+
+          <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
+           
+           <div class="col">
+              <!-- <label class="form-label">Date</label> -->
+              <input type="date" class="form-control" id="myDateInput" name="myDateInput" placeholder="Date *"> 
+           </div>
+
+            <div class="col">
+              <div class="mb-3">
+               <!-- <label class="form-label">Checkup Type</label> -->
+               <select name="department" id="checkup" class="form-control">
+                 <option value="General Health">General Health</option>
+                 <option value="Cardiology">Cardiology</option>
+                 <option value="Dental">Dental</option>
+                 <option value="Neurology">Neurology</option>
+                 <option value="Orthopaedics">Orthopaedics</option>
+               </select>
+              </div>  
+            </div>
+         
+        </div>
+
+         <div class="mb-3">
+             <!-- <label class="form-label">Phone</label> -->
+             <input type="number" class="form-control" id="number" name="number" placeholder="Phone *">
+         </div>
+        
+         <!-- <div class="row mb-3">
+            <label class="form-label">Upload Image</label>
+              <div class="col-2">
+               <img class="preview_img" src="images/default_profile.jpg">
+              </div>
+
+             <div class="col-10">
+              <div class="file-upload text-secondary">
+                <input type="file" class="image" id="image" name="image" accept="image/*">
+                <span class="fs-4 fw-2">Choose file...</span>
+                <span>or drag and drop file here</span>
+              </div>
+             </div>
+         </div> -->
+
+          <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+            <textarea name="message" id="message" class="form-control highlight-on-hover" rows="6" placeholder="Enter message"></textarea>
+          </div>
+      
+        <div>
+
+          <div style="display:flex;" class="button-container">
+            <button type="submit" class="add-button wow zoomIn" id="insertBtn" style="background-color: #darkblue;">Submit</button>&nbsp;
+
+            <button type="button" class="add-button" data-bs-dismiss="offcanvas" style="background-color: #090909">Cancel</button>
+          </div>
+           
+        </div>
+      </form>
+    </div>
+  </div>
+
 
 
 
@@ -430,31 +577,22 @@
 
   <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
-    <!-- congrats & summary -->
+    <h3 style="text-align: left">Appointments</h3>
 
-      <!-- congrats -->
-
-
-      <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1">
-
-        <div class="p-10">
+    <br>
 
 
-            {{-- =================================================================== --}}
-
-
-
-
-
-
-        </div>
-
-        <div class="">
-            <div id="sealsOverview"></div>
-        </div>
+    <div class="search-container">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search...">
+        
+        <button class="add-button" id="offcanvasExampleLabel" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser" >Add</button>
 
     </div>
 
+    <!-- <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
+        <i class="fa-solid fa-user-plus fa-xs"></i>
+        Add new user
+      </button> -->
 
 
 
@@ -462,13 +600,202 @@
 
 
 
-  <!-- end content -->
+
+
+
+
+    <table class="table-fixed w-full">
+
+        <!-- table head -->
+        <thead class="text-left">
+            <tr>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Patient</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Checkup</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Phone</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Date</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Message</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-center">Action</th>
+            </tr>
+        </thead>
+        <!-- end table head -->
+
+        <!-- table body -->
+        <tbody class="text-left text-gray-600">
+
+
+@foreach ($appointments as $item)
+
+
+
+
+            <!-- item -->
+            <tr>
+                <!-- name -->
+                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center">
+                    <div class="w-8 h-8 overflow-hidden rounded-full">
+                        <img src="{{$item->profile_photo_url ?? 'doctor/img/user2.jpg'}}" class="profile_photo_url" alt="">
+                    </div>
+                    <p class="ml-3">{{$item->name}}</p>
+                </th>
+                <!-- name -->
+
+                <?php
+
+
+                ?>
+
+            </th>
+
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$item->checkup_type}}</th>
+
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$item->phone}}</th>
+
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{ \Carbon\Carbon::parse($item->date)->format('j F Y') }}
+
+
+                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$item->message}}</th>
+
+
+              <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-center">
+
+                <div class="flex flex-row justify-center items-center">
+                    <a href="#" class="btn mr-4 text-sm py-2 block">Edit</a>
+                    <a href="#" style="background-color: red" class="btn-shadow text-sm py-2 block">Delete</a>
+                </div>
+
+              </th>
+
+            </tr>
+
+@endforeach
+
+
+        </tbody>
+        <!-- end table body -->
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <!-- ============================================================end content  ==================================================================-->
+
+
+
+
+
+
+
 </div>
 <!-- end wrapper -->
 
 <!-- script -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <!-- Jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Datatables  -->
+  <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
+  <!-- JS  -->
+
+
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="doctor/js/scripts.js"></script>
+
+
+<script>
+    
+  // function to display image before upload
+  $("input.image").change(function() {
+    var file = this.files[0];
+    var url = URL.createObjectURL(file);
+    $(this).closest(".row").find(".preview_img").attr("src", url);
+  });
+
+  </script>
+
+
+  <script>
+  $(document).ready(function() {
+    $('.main-form').submit(function(e) {
+      e.preventDefault();
+
+      // Get form data based on element IDs
+      var formData = {
+        user_id:$('#user_id').val(),
+        name: $('#name').val(),
+        email: $('#email').val(),
+        date: $('#myDateInput').val(),
+        department: $('#checkup').val(),
+        number: $('#number').val(),
+        message: $('#message').val(),
+        _token: $('meta[name="csrf-token"]').attr('content')
+      };
+
+      // Client-side validation
+      if (!formData.name || !formData.email || !formData.date || !formData.department || !formData.number) {
+        // Show an error toast
+        Toastify({
+          text: 'Validation failed: Please fill * required fields.',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: '#ff6347', // Tomato color for error
+          stopOnFocus: true
+        }).showToast();
+        return;
+      }
+
+      // Make Ajax request to the Laravel route
+      $.ajax({
+        type: 'POST',
+        url: '/submit-appointment',
+        data: formData,
+        success: function(response) {
+          // Show a success toast
+          Toastify({
+            text: response.message,
+            duration: 3000,
+            close: true,
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: '#4CAF50', // Green color for success
+            stopOnFocus: true
+          }).showToast();
+
+          // Optionally, reset the form
+          $('.main-form')[0].reset();
+        },
+        error: function(error) {
+          // Show an error toast for the Ajax request
+          Toastify({
+            text: 'Error submitting appointment. Please try again later.',
+            duration: 3000,
+            close: true,
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: '#ff6347', // Tomato color for error
+            stopOnFocus: true
+          }).showToast();
+        }
+      });
+    });
+  });
+</script>
+
+
 <!-- end script -->
 
 </body>

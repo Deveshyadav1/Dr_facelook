@@ -50,7 +50,7 @@ class HomeController extends Controller
 
 
 
- public function submit(Request $request)
+ public function submit_user_appointment(Request $request)
     {
         // No need for server-side validation in this example
 

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 use App\Models\User;
 
-use App\Models\Appointment;
+use App\Models\User_appointment;
 use App\Models\Doctor;
 
 
@@ -15,12 +17,20 @@ class DoctorController extends Controller
 {
     public function appointment()
     {
+        $appointments = DB::table('user_appointments')
+    ->join('users', 'user_appointments.user_id', '=', 'users.id')
+    ->select('user_appointments.*', 'users.name', 'users.email', 'users.phone', 'users.address', 'users.avatar')
+    ->get();
 
-    $appointments = Appointment::orderBy('id','DESC')->get(); // Fetch all appointments
+// You can now use $appointments in your view
+
+    // $appointments = User_appointment::orderBy('id','DESC')->get(); // Fetch all appointments
 
     return view('doctor.appointment', ['appointments' => $appointments]);
 
     }
+
+
 
 
      public function create_appointment(Request $request)
@@ -30,14 +40,21 @@ class DoctorController extends Controller
 
          /*echo "123";die();*/
 
+         echo $request->all();die;
+
+
         // Example: Save the appointment data
-        $appointment = new Appointment();
+        $appointment = new User_appointment();
+
         $appointment->title = $request->input('title');
         $appointment->date = $request->input('datetime');
         $appointment->save();
 
         return response()->json(['message' => 'Appointment created successfully']);
     }
+
+
+
 
     public function appointment_status()
     {
@@ -46,6 +63,7 @@ class DoctorController extends Controller
 
 
     public function appointment_type()
+
     {
         return view('doctor.appointment_type');
     }

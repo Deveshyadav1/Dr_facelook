@@ -431,14 +431,18 @@
 
         <div>
             <h1 class="text-lg font-bold tracking-wide">Congratulations {{Auth::user()->name}}</h1>
-            <p class="text-gray-600 mt-2">Best seller of the month</p>
+            <p class="text-gray-600 mt-2">Completed Appoientments</p>
         </div>
+
+          <?php
+            $records = count($appointments); 
+          ?>
 
         <div class="flex flex-row mt-10 items-end">
 
             <div class="flex-1">
-                <h1 class="font-extrabold text-4xl text-teal-400">$89k</h1>
-                <p class="mt-3 mb-4 text-xs text-gray-500">You have done 57.6% more sales today.</p>
+                <h1 class="font-extrabold text-4xl text-teal-400"><?php echo $records; ?></h1>
+                <p class="mt-3 mb-4 text-xs text-gray-500">You have completed total <?php echo $records; ?> Appoientments</p>
                 <a href="#" class="btn-shadow py-3">
                     view sales
                 </a>
@@ -684,7 +688,7 @@
       <div class="card">
 
     <div class="card-body">
-        <h2 class="font-bold text-lg mb-10">Recent Orders</h2>
+        <h2 class="font-bold text-lg mb-10">Recent Appoientments</h2>
 
     <!-- start a table -->
     <table class="table-fixed w-full">
@@ -692,11 +696,10 @@
         <!-- table head -->
         <thead class="text-left">
             <tr>
-                <th class="w-1/2 pb-10 text-sm font-extrabold tracking-wide">customer</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Product</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Invoice</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">price</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">status</th>
+                <th class="w-1/2 pb-10 text-sm font-extrabold tracking-wide">Patients</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Date</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Checkup</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Contact</th>
             </tr>
         </thead>
         <!-- end table head -->
@@ -704,66 +707,9 @@
         <!-- table body -->
         <tbody class="text-left text-gray-600">
 
-            <!-- item -->
-            <tr>
-                <!-- name -->
-                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
-                    <div class="w-8 h-8 overflow-hidden rounded-full">
-                        <img src="doctor/img/user2.jpg" class="object-cover">
-                    </div>
-                    <p class="ml-3 name-1">user name</p>
-                </th>
-                <!-- name -->
-
-                <!-- product -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
-                <!-- product -->
-
-                <!-- invoice -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
-                <!-- invoice -->
-
-                <!-- price -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
-                <!-- price -->
-
-                <!-- status -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
-                <!-- status -->
-
-            </tr>
-            <!-- item -->
+         @foreach($appointments as $appoientment) 
 
 
-            <!-- item -->
-            <tr>
-                <!-- name -->
-                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
-                    <div class="w-8 h-8 overflow-hidden rounded-full">
-                        <img src="doctor/img/user3.jpg" class="object-cover">
-                    </div>
-                    <p class="ml-3 name-1">user name</p>
-                </th>
-                <!-- name -->
-
-                <!-- product -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
-                <!-- product -->
-
-                <!-- invoice -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
-                <!-- invoice -->
-
-                <!-- price -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
-                <!-- price -->
-
-                <!-- status -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
-                <!-- status -->
-
-            </tr>
-            <!-- item -->
 
 
             <!-- item -->
@@ -773,91 +719,25 @@
                     <div class="w-8 h-8 overflow-hidden rounded-full">
                         <img src="doctor/img/user2.jpg" class="object-cover">
                     </div>
-                    <p class="ml-3 name-1">user name</p>
+                    <p class="ml-3">{{$appoientment->name}}</p>
                 </th>
-                <!-- name -->
-
-                <!-- product -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
+                  
+                  <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$appoientment->date}}</th>
                 <!-- product -->
 
                 <!-- invoice -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
+                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$appoientment->checkup_type}}<span class=""></span></th>
                 <!-- invoice -->
 
                 <!-- price -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
-                <!-- price -->
-
-                <!-- status -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
-                <!-- status -->
-
+                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$appoientment->number}}<span class=""></span></th>
+              
             </tr>
-            <!-- item -->
 
-            <!-- item -->
-            <tr>
-                <!-- name -->
-                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
-                    <div class="w-8 h-8 overflow-hidden rounded-full">
-                        <img src="doctor/img/user1.jpg" class="object-cover">
-                    </div>
-                    <p class="ml-3 name-1">user name</p>
-                </th>
-                <!-- name -->
-
-                <!-- product -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
-                <!-- product -->
-
-                <!-- invoice -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
-                <!-- invoice -->
-
-                <!-- price -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
-                <!-- price -->
-
-                <!-- status -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
-                <!-- status -->
-
+            @endforeach
+            
             </tr>
-            <!-- item -->
-
-            <!-- item -->
-            <tr>
-                <!-- name -->
-                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
-                    <div class="w-8 h-8 overflow-hidden rounded-full">
-                        <img src="doctor/img/user3.jpg" class="object-cover">
-                    </div>
-                    <p class="ml-3 name-1">user name</p>
-                </th>
-                <!-- name -->
-
-                <!-- product -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
-                <!-- product -->
-
-                <!-- invoice -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
-                <!-- invoice -->
-
-                <!-- price -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
-                <!-- price -->
-
-                <!-- status -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
-                <!-- status -->
-
-            </tr>
-            <!-- item -->
-
-
-
+            
 
         </tbody>
         <!-- end table body -->

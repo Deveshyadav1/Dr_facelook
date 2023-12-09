@@ -11,5 +11,5 @@ class User_appointment extends Model
 
      protected $table = 'user_appointments'; // Specify the table name if different from the model name
 
-    protected $fillable = ['user_id', 'name','email','date','checkup_type','number','message']; // Define the columns that can be mass-assigned
+    protected $fillable = ['user_id','doctor_id', 'name','email','date','checkup_type','number','message']; // Define the columns that can be mass-assigned
 }

@@ -188,7 +188,7 @@
         <div class="row justify-content-center">
           <div class="col-md-4 py-3 py-md-0">
           <a href="/chatify"> <div style="color:black;" class="card-service wow fadeInUp highlight-on-hover">
-              <div class="circle-shape bg-secondary text-white" >
+            <div class="circle-shape bg-secondary text-white" >
                 <span class="mai-chatbubbles-outline"></span>
               </div>
               <p><span>Chat</span> Room</p>
@@ -420,12 +420,22 @@ $users = User::select('*')
           </div>
 
           <div class="col-12 col-sm-6 py-2 wow fadeInRight " data-wow-delay="300ms">
-            <select name="departement" id="checkup" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
+            <select  id="checkup_type" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
               <option value="general">General Health</option>
               <option value="cardiology">Cardiology</option>
               <option value="dental">Dental</option>
               <option value="neurology">Neurology</option>
               <option value="orthopaedics">Orthopaedics</option>
+            </select>
+          </div>
+
+
+          <div class="col-12 py-2 wow fadeInRight " data-wow-delay="300ms">
+            <select  id="doctor_id" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
+
+              @foreach($users as $user)
+              <option value="{{$user['id']}}">{{$user['name']}}</option>
+              @endforeach
             </select>
           </div>
 
@@ -480,12 +490,21 @@ $users = User::select('*')
           </div>
 
           <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
-            <select name="department" id="checkup" class="custom-select highlight-on-hover">
+            <select name="checkup_type" id="checkup_type" class="custom-select highlight-on-hover">
               <option value="general">General Health</option>
               <option value="cardiology">Cardiology</option>
               <option value="dental">Dental</option>
               <option value="neurology">Neurology</option>
               <option value="orthopaedics">Orthopaedics</option>
+            </select>
+          </div>
+
+           <div class="col-12 py-2 wow fadeInRight " data-wow-delay="300ms">
+            <select name="doctor_id" id="doctor_id" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
+
+              @foreach($users as $user)
+              <option value="{{$user['id']}}">{{$user['name']}}</option>
+              @endforeach
             </select>
           </div>
 
@@ -710,17 +729,18 @@ $users = User::select('*')
       // Get form data based on element IDs
       var formData = {
         user_id:$('#user_id').val(),
+        doctor_id:$('#doctor_id').val(),
         name: $('#name').val(),
         email: $('#email').val(),
         date: $('#myDateInput').val(),
-        department: $('#checkup').val(),
+        checkup_type: $('#checkup_type').val(),
         number: $('#number').val(),
         message: $('#message').val(),
         _token: $('meta[name="csrf-token"]').attr('content')
       };
 
       // Client-side validation
-      if (!formData.name || !formData.email || !formData.date || !formData.department || !formData.number) {
+      if (!formData.name || !formData.email || !formData.date || !formData.checkup_type || !formData.number) {
         // Show an error toast
         Toastify({
           text: 'Validation failed: Please fill * required fields.',

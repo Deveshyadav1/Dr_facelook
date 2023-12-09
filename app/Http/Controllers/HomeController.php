@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Appointment;
 use App\Models\Doctor;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User_appointment;
 
@@ -23,8 +24,17 @@ class HomeController extends Controller
             }
                elseif (Auth::user()->usertype=='1') {
 
+
+                     $doctor_id = Auth::user()->id;
+
+                        $appointments = DB::table('user_appointments')
+                        ->join('users', 'user_appointments.user_id', '=', 'users.id')
+                        ->select('user_appointments.*', 'users.name', 'users.email', 'users.phone', 'users.address', 'users.avatar')
+                        ->where('user_appointments.doctor_id', '=',$doctor_id) // Adding the where condition
+                        ->get();
+
                     // $_SESSION['active_doctor'] = 1;
-                    return view('doctor.home');
+                    return view('doctor.home',['appointments'=> $appointments]);
             }
             else
             {

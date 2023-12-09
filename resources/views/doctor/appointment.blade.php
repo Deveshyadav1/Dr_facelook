@@ -484,6 +484,15 @@
   <!-- end sidbar -->
 
 
+<?php
+use App\Models\User;
+
+$users = User::where('usertype', 0)->get();
+
+// echo"<pre>";print_r($users);die();
+
+?>
+
 
 
   {{-- ========================================================== Start Content ================================================================ --}}
@@ -501,17 +510,18 @@
         <div class="row mb-3">
            <div class="col">
              <!-- <label class="form-label">Name</label> -->
-             <input type="text" class="form-control" name="name" id="name" placeholder="Name *">
+             <input type="text" class="form-control" name="name" id="name" placeholder="Name ">
            </div>
           <div class="col">
              <!-- <label class="form-label">Email</label> -->
-             <input type="email" class="form-control" id="email" name="email" placeholder="Email*">
+             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
           </div>
         </div>
         
-        <div class="row mb-3">
+         <input type="hidden" name="doctor_id" id="doctor_id" value="{{Auth::user()->id}}">
 
-          <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
+        <div class="row mb-3">
+          <!-- <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}"> -->
            
            <div class="col">
               <!-- <label class="form-label">Date</label> -->
@@ -521,7 +531,7 @@
             <div class="col">
               <div class="mb-3">
                <!-- <label class="form-label">Checkup Type</label> -->
-               <select name="department" id="checkup" class="form-control">
+               <select name="checkup_type" id="checkup_type" class="form-control">
                  <option value="General Health">General Health</option>
                  <option value="Cardiology">Cardiology</option>
                  <option value="Dental">Dental</option>
@@ -533,9 +543,24 @@
          
         </div>
 
+
+              <div class="mb-3">
+               <!-- <label class="form-label">Checkup Type</label> -->
+               <select name="user_id" id="user_id" class="form-control">
+                 
+                 @foreach ($users as $user) 
+                   
+                   <option value="{{$user['id']}}">{{$user['name']}}</option>
+                  @endforeach
+                 
+                 
+               </select>
+              </div>  
+           
+
          <div class="mb-3">
              <!-- <label class="form-label">Phone</label> -->
-             <input type="number" class="form-control" id="number" name="number" placeholder="Phone *">
+             <input type="number" class="form-control" id="number" name="number" placeholder="Phone ">
          </div>
         
          <!-- <div class="row mb-3">
@@ -610,10 +635,10 @@
         <thead class="text-left">
             <tr>
                 <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Patient</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Checkup</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Phone</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Date</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Message</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Checkup</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Phone</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Date</th>
+            
                 <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-center">Action</th>
             </tr>
         </thead>
@@ -631,9 +656,9 @@
             <!-- item -->
             <tr>
                 <!-- name -->
-                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center">
+                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-left">
                     <div class="w-8 h-8 overflow-hidden rounded-full">
-                        <img src="{{$item->profile_photo_url ?? 'doctor/img/user2.jpg'}}" class="profile_photo_url" alt="">
+                        <img height="100%" width="100%" src="{{$item->profile_photo_url ?? 'doctor/img/user1.jpg'}}" class="profile_photo_url" alt="">
                     </div>
                     <p class="ml-3">{{$item->name}}</p>
                 </th>
@@ -646,19 +671,21 @@
 
             </th>
 
-            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$item->checkup_type}}</th>
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-left">{{$item->checkup_type}}</th>
 
-            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$item->phone}}</th>
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-left">{{$item->phone}}</th>
 
-            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{ \Carbon\Carbon::parse($item->date)->format('j F Y') }}
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-left">{{ \Carbon\Carbon::parse($item->date)->format('j F Y') }}
 
 
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$item->message}}</th>
+                <!-- <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$item->message}}</th> -->
 
 
               <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-center">
 
                 <div class="flex flex-row justify-center items-center">
+                  <a href="/chatify/{{$item->user_id}}"> <img height="35px" width="35px" src="https://i.pinimg.com/1200x/ee/ba/26/eeba26add7248f938ebd1b97fa41fba3.jpg" class="profile_photo_url" alt=""> </a> &nbsp;&nbsp;
+
                     <a href="#" class="btn mr-4 text-sm py-2 block">Edit</a>
                     <a href="#" style="background-color: red" class="btn-shadow text-sm py-2 block">Delete</a>
                 </div>
@@ -734,17 +761,18 @@
       // Get form data based on element IDs
       var formData = {
         user_id:$('#user_id').val(),
+        doctor_id:$('#doctor_id').val(),
         name: $('#name').val(),
         email: $('#email').val(),
         date: $('#myDateInput').val(),
-        department: $('#checkup').val(),
+        checkup_type: $('#checkup_type').val(),
         number: $('#number').val(),
         message: $('#message').val(),
         _token: $('meta[name="csrf-token"]').attr('content')
       };
 
       // Client-side validation
-      if (!formData.name || !formData.email || !formData.date || !formData.department || !formData.number) {
+      if (!formData.date || !formData.checkup_type) {
         // Show an error toast
         Toastify({
           text: 'Validation failed: Please fill * required fields.',

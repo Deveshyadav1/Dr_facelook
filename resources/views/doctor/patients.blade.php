@@ -5,9 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="doctor/img/fav.png" type="image/x-icon">
   <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <!-- Font Awesome  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Datatables CSS  -->
+  <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+  <!-- CSS  -->
+
   <link rel="stylesheet" type="text/css" href="doctor/css/style.css">
+  <link rel="stylesheet" href="doctor/css/style2.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
   <title>Welcome To Dr Facelook</title>
 </head>
+
+<style>
+     .table-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        padding: 8px;
+        font-size: 14px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .add-button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        color: #333;
+        padding: 8px;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 0 4px;
+    }
+</style>
+</style>
+
 <body class="bg-gray-100">
 
 
@@ -376,7 +440,7 @@
       </a>
 
 
-       <a href="/patients" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out   duration-500">
+      <a href="/patients" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out   duration-500">
         <i class="fad fa-shield-check text-xs mr-2"></i>
         Patients
       </a>
@@ -415,7 +479,7 @@
       <!-- end link -->
 
 
-      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">UI Elements</p>
+      <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">......................................</p>
 
 
 
@@ -425,348 +489,131 @@
   </div>
   <!-- end sidbar -->
 
-  <!-- strat content -->
-  <div class="bg-gray-100 flex-1 p-6 md:mt-16">
-
-    <!-- congrats & summary -->
-    <div class="grid grid-cols-3 lg:grid-cols-1 gap-5">
-      <!-- congrats -->
-<div class="card col-span-1">
-
-    <div class="card-body h-full flex flex-col justify-between">
-
-        <div>
-            <h1 class="text-lg font-bold tracking-wide">Congratulations {{Auth::user()->name}}</h1>
-            <p class="text-gray-600 mt-2">Completed Appoientments</p>
-        </div>
-
-          <?php
-            $records = count($appointments); 
-          ?>
-
-        <div class="flex flex-row mt-10 items-end">
-
-            <div class="flex-1">
-                <h1 class="font-extrabold text-4xl text-teal-400"><?php echo $records; ?></h1>
-                <p class="mt-3 mb-4 text-xs text-gray-500">You have completed total <?php echo $records; ?> Appoientments</p>
-                <a href="#" class="btn-shadow py-3">
-                    view sales
-                </a>
-            </div>
-
-            <div class="flex-1 ml-10 w-32 h-32 lg:w-auto lg:h-auto overflow-hidden">
-                <img class="object-cover" src="doctor/img/congrats.svg">
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-<!-- end congrats -->
-      <div class="card p-0 overflow-hidden col-span-2 lg:col-span-1 flex flex-row lg:flex-col">
-
-    <!-- right -->
-    <div class="border-r border-gray-200 w-2/3 lg:w-full lg:mb-5">
-
-        <!-- top -->
-        <div class="p-5 flex flex-row flex-wrap justify-between items-center">
-            <h2 class="font-bold text-lg">Order Summary</h2>
-            <div class="flex flex-row justify-center items-center">
-                <a href="#" class="btn mr-4 text-sm py-2 block">month</a>
-                <a href="#" class="btn-shadow text-sm py-2 block">week</a>
-            </div>
-        </div>
-        <!-- end top -->
-
-        <!-- chart -->
-        <div id="SummaryChart"></div>
-        <!-- end chart -->
-
-    </div>
-    <!-- end right -->
-
-    <!-- left -->
-    <div class="w-1/3 lg:w-full">
-
-        <!-- top -->
-        <div class="p-5 border-b border-gray-200">
-            <h2 class="font-bold text-lg mb-6">Sales History</h2>
-
-            <div class="flex flex-row justify-between mb-3">
-                <div class="">
-                    <h4 class="text-gray-600 font-thin">Puma Shoes</h4>
-                    <p class="text-gray-400 text-xs font-hairline">30 min ago</p>
-                </div>
-                <div class="text-sm font-medium">
-                    <span class="text-green-400">+</span> $250
-                </div>
-            </div>
-
-            <div class="flex flex-row justify-between mb-3">
-                <div class="">
-                    <h4 class="text-gray-600 font-thin">Google Pixel 4 xl</h4>
-                    <p class="text-gray-400 text-xs font-hairline">1 day ago</p>
-                </div>
-                <div class="text-sm font-medium">
-                    <span class="text-red-400">-</span> $10
-                </div>
-            </div>
-
-            <div class="flex flex-row justify-between">
-                <div class="">
-                    <h4 class="text-gray-600 font-thin">Nike Air Jordan</h4>
-                    <p class="text-gray-400 text-xs font-hairline">2 hour ago</p>
-                </div>
-                <div class="text-sm font-medium">
-                    <span class="text-red-400">-</span> $98
-                </div>
-            </div>
-
-
-
-        </div>
-        <!-- end top -->
-
-        <!-- bottom -->
-        <div class="p-5">
-            <h2 class="font-bold text-lg mb-2">Sales History</h2>
-            <strong class="text-teal-400 font-extrabold text-xl">$82,950.96</strong>
-
-            <div class="bg-gray-300 h-2 rounded-full mt-2 relative">
-                <div class="rounded-full bg-teal-400 h-full w-3/4 shadow-md"></div>
-            </div>
-        </div>
-        <!-- end bottom -->
-
-    </div>
-    <!-- end left -->
-
-</div>
-
-
-
-    </div>
-    <!-- end congrats & summary -->
-
-    <!-- status -->
-    <div class="grid grid-cols-5 gap-5 mt-5 lg:grid-cols-2">
-
-    <!-- status -->
-    <div class="card col-span-1">
-        <div class="card-body">
-            <h5 class="uppercase text-xs tracking-wider font-extrabold">today Appoientments</h5>
-            <h1 class="capitalize text-lg mt-1 mb-1"><span class="">{{ $todays_appoientment_count }}</span>  <span class="text-xs tracking-widest font-extrabold">  <span class=""></span> </span></h1>
-            <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
-        </div>
-    </div>
-    <!-- status -->
-
-    <!-- status -->
-    <div class="card col-span-1">
-        <div class="card-body">
-            <h5 class="uppercase text-xs tracking-wider font-extrabold">yesterday</h5>
-            <h1 class="capitalize text-lg mt-1 mb-1">$<span class="num-3"></span>  <span class="text-xs tracking-widest font-extrabold"> / <span class="num-2"></span> orders</span></h1>
-            <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
-        </div>
-    </div>
-    <!-- status -->
-
-    <!-- status -->
-    <div class="card col-span-1">
-        <div class="card-body">
-            <h5 class="uppercase text-xs tracking-wider font-extrabold">last week</h5>
-            <h1 class="capitalize text-lg mt-1 mb-1">$<span class="num-3"></span>  <span class="text-xs tracking-widest font-extrabold"> / <span class="num-2"></span> orders</span></h1>
-            <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
-        </div>
-    </div>
-    <!-- status -->
-
-    <!-- status -->
-    <div class="card col-span-1">
-        <div class="card-body">
-            <h5 class="uppercase text-xs tracking-wider font-extrabold">last month</h5>
-            <h1 class="capitalize text-lg mt-1 mb-1">$<span class="num-3"></span>  <span class="text-xs tracking-widest font-extrabold"> / <span class="num-2"></span> orders</span></h1>
-            <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
-        </div>
-    </div>
-    <!-- status -->
-
-    <!-- status -->
-    <div class="card col-span-1 lg:col-span-2">
-        <div class="card-body">
-            <h5 class="uppercase text-xs tracking-wider font-extrabold">last 90-days</h5>
-            <h1 class="capitalize text-lg mt-1 mb-1">$<span class="num-3"></span>  <span class="text-xs tracking-widest font-extrabold"> / <span class="num-2"></span> orders</span></h1>
-            <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
-        </div>
-    </div>
-    <!-- status -->
-
-
-</div>
-    <!-- end status -->
-
-    <!-- best seller & traffic -->
-    <div class="grid grid-cols-2 lg:grid-cols-1 gap-5 mt-5">
-      <div class="card">
-
-    <div class="card-body">
-        <div class="flex flex-row justify-between items-center">
-            <h1 class="font-extrabold text-lg">best sellers</h1>
-            <a href="#" class="btn-gray text-sm">view all</a>
-        </div>
-
-        <table class="table-auto w-full mt-5 text-right">
-
-            <thead>
-                <tr>
-                    <td class="py-4 font-extrabold text-sm text-left">product</td>
-                    <td class="py-4 font-extrabold text-sm">price</td>
-                    <td class="py-4 font-extrabold text-sm">sold</td>
-                    <td class="py-4 font-extrabold text-sm">profit</td>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <!-- item -->
-                <tr class="">
-                    <td class="py-4 text-sm text-gray-600 flex flex-row items-center text-left">
-                        <div class="w-8 h-8 overflow-hidden mr-3">
-                            <img src="doctor/img/sneakers.svg" class="object-cover">
-                        </div>
-                        Sneakers and Tennis
-                    </td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-2"></span></td>
-                    <td class="py-4 text-xs text-gray-600"><span class="num-3"></span></td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-4"></span></td>
-                </tr>
-                <!-- end item -->
-
-                <!-- item -->
-                <tr class="">
-                    <td class="py-4 text-sm text-gray-600 flex flex-row items-center">
-                        <div class="w-8 h-8 overflow-hidden mr-3">
-                            <img src="doctor/img/socks.svg" class="object-cover">
-                        </div>
-                        Crazy Socks & Graphic Socks for Men
-                    </td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-2"></span></td>
-                    <td class="py-4 text-xs text-gray-600"><span class="num-3"></span></td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-4"></span></td>
-                </tr>
-                <!-- end item -->
-
-                <!-- item -->
-                <tr class="">
-                    <td class="py-4 text-sm text-gray-600 flex flex-row items-center">
-                        <div class="w-8 h-8 overflow-hidden mr-3">
-                            <img src="doctor/img/soccer.svg" class="object-cover">
-                        </div>
-                        Adidas Soccer Ball
-                    </td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-2"></span></td>
-                    <td class="py-4 text-xs text-gray-600"><span class="num-3"></span></td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-4"></span></td>
-                </tr>
-                <!-- end item -->
-
-                <!-- item -->
-                <tr class="">
-                    <td class="py-4 text-sm text-gray-600 flex flex-row items-center">
-                        <div class="w-8 h-8 overflow-hidden mr-3">
-                            <img src="doctor/img/food.svg" class="object-cover">
-                        </div>
-                        Best Chocolate Chip Cookies
-                    </td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-2"></span></td>
-                    <td class="py-4 text-xs text-gray-600"><span class="num-3"></span></td>
-                    <td class="py-4 text-xs text-gray-600">$ <span class="num-4"></span></td>
-                </tr>
-                <!-- end item -->
-
-            </tbody>
-
-        </table>
-
-    </div>
-</div>
-      <div class="card">
-
-    <div class="card-body">
-        <h2 class="font-bold text-lg mb-10">Recent Appoientments</h2>
-
-    <!-- start a table -->
-    <table class="table-fixed w-full">
-
-        <!-- table head -->
-        <thead class="text-left">
-            <tr>
-                <th class="w-1/2 pb-10 text-sm font-extrabold tracking-wide">Patients</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Date</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Checkup</th>
-                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">Contact</th>
-            </tr>
-        </thead>
-        <!-- end table head -->
-
-        <!-- table body -->
-        <tbody class="text-left text-gray-600">
-
-         @foreach($appointments as $appoientment) 
-
-
-
-
-            <!-- item -->
-            <tr>
-                <!-- name -->
-                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
-                    <div class="w-8 h-8 overflow-hidden rounded-full">
-                        <img src="doctor/img/user2.jpg" class="object-cover">
-                    </div>
-                    <p class="ml-3">{{$appoientment->name}}</p>
-                </th>
-                  
-                  <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$appoientment->date}}</th>
-                <!-- product -->
-
-                <!-- invoice -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$appoientment->checkup_type}}<span class=""></span></th>
-                <!-- invoice -->
-
-                <!-- price -->
-                <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">{{$appoientment->number}}<span class=""></span></th>
-              
-            </tr>
-
-            @endforeach
-            
-            </tr>
-            
-
-        </tbody>
-        <!-- end table body -->
-
-    </table>
-    <!-- end a table -->
-    </div>
-
-</div>
-
-    </div>
-    <!-- end best seller & traffic -->
-
-
-  </div>
-  <!-- end content -->
+
+<?php
+use App\Models\User;
+
+$users = User::where('usertype', 0)->get();
+
+// echo"<pre>";print_r($users);die();
+
+?>
+
+
+
+  <!-- -- ========================================================== Start Content ================================================================ -- -->
+
+
+
+
+
+  <!-- ============================================================end content  ==================================================================-->
+
+
+
+
+
+
 
 </div>
 <!-- end wrapper -->
 
 <!-- script -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <!-- Jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Datatables  -->
+  <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
+  <!-- JS  -->
+
+
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="doctor/js/scripts.js"></script>
+
+
+<script>
+    
+  // function to display image before upload
+  $("input.image").change(function() {
+    var file = this.files[0];
+    var url = URL.createObjectURL(file);
+    $(this).closest(".row").find(".preview_img").attr("src", url);
+  });
+
+  </script>
+
+
+  <script>
+  $(document).ready(function() {
+    $('.main-form').submit(function(e) {
+      e.preventDefault();
+
+      // Get form data based on element IDs
+      var formData = {
+        user_id:$('#user_id').val(),
+        doctor_id:$('#doctor_id').val(),
+        name: $('#name').val(),
+        email: $('#email').val(),
+        date: $('#myDateInput').val(),
+        checkup_type: $('#checkup_type').val(),
+        number: $('#number').val(),
+        message: $('#message').val(),
+        _token: $('meta[name="csrf-token"]').attr('content')
+      };
+
+      // Client-side validation
+      if (!formData.date || !formData.checkup_type) {
+        // Show an error toast
+        Toastify({
+          text: 'Validation failed: Please fill * required fields.',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: '#ff6347', // Tomato color for error
+          stopOnFocus: true
+        }).showToast();
+        return;
+      }
+
+      // Make Ajax request to the Laravel route
+      $.ajax({
+        type: 'POST',
+        url: '/submit-appointment',
+        data: formData,
+        success: function(response) {
+          // Show a success toast
+          Toastify({
+            text: response.message,
+            duration: 3000,
+            close: true,
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: '#4CAF50', // Green color for success
+            stopOnFocus: true
+          }).showToast();
+
+          // Optionally, reset the form
+          $('.main-form')[0].reset();
+        },
+        error: function(error) {
+          // Show an error toast for the Ajax request
+          Toastify({
+            text: 'Error submitting appointment. Please try again later.',
+            duration: 3000,
+            close: true,
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: '#ff6347', // Tomato color for error
+            stopOnFocus: true
+          }).showToast();
+        }
+      });
+    });
+  });
+</script>
+
+
 <!-- end script -->
 
 </body>

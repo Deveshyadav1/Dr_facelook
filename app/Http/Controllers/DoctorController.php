@@ -65,6 +65,12 @@ class DoctorController extends Controller
     }
 
 
+    public function patients()
+    {
+        return view('doctor.patients');
+    }
+
+
     public function appointment_type()
 
     {

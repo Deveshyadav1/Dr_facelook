@@ -11,6 +11,7 @@ use App\Models\User;
 
 use App\Models\User_appointment;
 use App\Models\Doctor;
+use App\Models\Patient;
 
 
 class DoctorController extends Controller
@@ -36,29 +37,6 @@ class DoctorController extends Controller
 
 
 
-    //  public function create_appointment(Request $request)
-    // {
-    //     // Validate the incoming data, save it to the database, and send a response.
-    //     // You can access the data using $request->input('key'), where 'key' is the form input field name.
-
-    //      /*echo "123";die();*/
-
-    //      echo $request->all();die;
-
-
-    //     // Example: Save the appointment data
-    //     $appointment = new User_appointment();
-
-    //     $appointment->title = $request->input('title');
-    //     $appointment->date = $request->input('datetime');
-    //     $appointment->save();
-
-    //     return response()->json(['message' => 'Appointment created successfully']);
-    // }
-
-
-
-
     public function appointment_status()
     {
         return view('doctor.appointment_status');
@@ -67,7 +45,21 @@ class DoctorController extends Controller
 
     public function patients()
     {
-        return view('doctor.patients');
+        $doctorId = Auth::user()->id;
+
+        $patients = DB::table('patients')
+    ->join('users', 'patients.user_id', '=', 'users.id')
+    ->select('users.*')
+    ->where('patients.doctor_id', '=', $doctorId)
+    ->get();
+
+    $patient_count = count($patients);
+      
+
+    // echo "<pre>";
+    // print_r($patients);die();
+
+        return view('doctor.patients',['patients' => $patients,'patient_count' => $patient_count]);
     }
 
 

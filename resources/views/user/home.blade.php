@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../assets/css/theme.css">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 
 
@@ -43,12 +43,8 @@
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 
-
 <!-- Include CSRF token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-
 
 </head>
 <body>
@@ -64,7 +60,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="#"><span class="text-primary">Dr</span> Facelook</a>
+        <a class="navbar-brand" href="/home"><span class="text-primary">Dr</span> Facelook</a>
 
         <form action="#">
           <div class="input-group input-navbar highlight-on-hover">
@@ -228,7 +224,21 @@
           <div class="col-lg-6 py-3 wow fadeInUp">
             <h1>Welcome to Your Health <br> Center</h1>
             <p class="text-grey mb-4">Welcome to Dr Facelook – Your One-Stop Health Companion! 🌟 Experience hassle-free appointment management with our web-based application. Connect with specialized doctors through chat or video calls for personalized consultations. After your consultation, conveniently purchase prescribed medicines directly from our platform. Your health, our priority – Dr Facelook, where care meets convenience! 💻👩‍⚕️💊 #HealthcareMadeEasy #DrFacelook #VirtualHealthcare</p>
-            <a href="about.html" class="btn btn-primary">Learn More</a>
+            
+            <!-- <a href="about.html" id="" class="btn btn-primary row container d-flex justify-content-center">Book Your First Free Appoientment </a> -->
+
+
+
+
+
+            
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <a href="#consult-section"> <div class=""> <button type="button" id="animatebutton" class="btn btn-primary highlight-on-hover animatebutton"> <i class="fa fa-check btn-icon-prepend"></i>Book Your First Free Appoientment </button> </div></a>
+    </div>
+</div>
+
+ 
           </div>
           <div class="col-lg-6 wow fadeInRight" data-wow-delay="400ms">
             <div class="img-place custom-img-1">
@@ -635,6 +645,7 @@ $users = User::select('*')
 @auth
 
 <script>
+
     // Variable to store the current location
     let currentLocation = null;
 
@@ -719,14 +730,31 @@ $users = User::select('*')
 
 {{-- ====================================================== Get Current location and show toast End ===================================================== --}}
 
-
-
 <script>
+
   $(document).ready(function() {
     $('.main-form').submit(function(e) {
       e.preventDefault();
 
-      // Get form data based on element IDs
+       var isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+
+      if (isLoggedIn == false) {
+            
+            Toastify({
+          text: 'Please Login for Make an appointment',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: 'linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))', // Tomato color for error
+          stopOnFocus: true
+        }).showToast();
+
+      }
+      else
+      {
+
+           // Get form data based on element IDs
       var formData = {
         user_id:$('#user_id').val(),
         doctor_id:$('#doctor_id').val(),
@@ -748,7 +776,7 @@ $users = User::select('*')
           close: true,
           gravity: 'top',
           position: 'center',
-          backgroundColor: '#ff6347', // Tomato color for error
+          backgroundColor: 'linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))', // Tomato color for error
           stopOnFocus: true
         }).showToast();
         return;
@@ -782,16 +810,36 @@ $users = User::select('*')
             close: true,
             gravity: 'top',
             position: 'center',
-            backgroundColor: '#ff6347', // Tomato color for error
+            backgroundColor: 'linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))', // Tomato color for error
             stopOnFocus: true
           }).showToast();
         }
       });
+
+
+      }
+
+
+
     });
   });
 </script>
 
 
+<script>
+  $( document ).ready(function() {
+    // Bounce button
+    $("#animatebutton").click(function(){
+        const element =  document.querySelector('.animatebutton');
+        element.classList.add('animated', 'rubberBand');
+        setTimeout(function() {
+          element.classList.remove('rubberBand'); 
+  },        2000); 
+    });
+    
+    
+});
+</script>
 
 
 

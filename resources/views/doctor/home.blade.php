@@ -445,12 +445,12 @@
           ?>
 
         <div class="flex flex-row mt-10 items-end">
-
+           
             <div class="flex-1">
                 <h1 class="font-extrabold text-4xl text-teal-400"><?php echo $records; ?></h1>
                 <p class="mt-3 mb-4 text-xs text-gray-500">You have completed total <?php echo $records; ?> Appoientments</p>
-                <a href="#" class="btn-shadow py-3">
-                    view sales
+                <a href="/appointment" class="btn-shadow py-3">
+                    view Appoientments
                 </a>
             </div>
 
@@ -552,27 +552,22 @@
     <!-- status -->
     <div class="grid grid-cols-5 gap-5 mt-5 lg:grid-cols-2">
 
-    <!-- status -->
     <div class="card col-span-1">
         <div class="card-body">
-            <h5 class="uppercase text-xs tracking-wider font-extrabold">today Appoientments</h5>
+            <h5 class="uppercase text-xs tracking-wider font-extrabold">Today's &nbsp;Patients</h5>
+            <h1 class="capitalize text-lg mt-1 mb-1"><span class=""></span> {{$todays_patients_count}}  <span class="text-xs tracking-widest font-extrabold">  <span class=""></span> </span></h1>
+            <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
+        </div>
+    </div>
+
+    <div class="card col-span-1">
+        <div class="card-body">
+            <h5 class="uppercase text-xs tracking-wider font-extrabold">Today's&nbsp; Appoientments</h5>
             <h1 class="capitalize text-lg mt-1 mb-1"><span class="">{{ $todays_appoientment_count }}</span>  <span class="text-xs tracking-widest font-extrabold">  <span class=""></span> </span></h1>
             <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
         </div>
     </div>
-    <!-- status -->
 
-    <!-- status -->
-    <div class="card col-span-1">
-        <div class="card-body">
-            <h5 class="uppercase text-xs tracking-wider font-extrabold">yesterday</h5>
-            <h1 class="capitalize text-lg mt-1 mb-1">$<span class="num-3"></span>  <span class="text-xs tracking-widest font-extrabold"> / <span class="num-2"></span> orders</span></h1>
-            <p class="capitalize text-xs text-gray-500">( $<span class="num-2"></span> in the last year )</p>
-        </div>
-    </div>
-    <!-- status -->
-
-    <!-- status -->
     <div class="card col-span-1">
         <div class="card-body">
             <h5 class="uppercase text-xs tracking-wider font-extrabold">last week</h5>

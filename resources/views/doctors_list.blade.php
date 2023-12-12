@@ -110,7 +110,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="#"><span class="text-primary">Dr</span> Facelook</a>
+        <a class="navbar-brand" href="/home"><span class="text-primary">Dr</span> Facelook</a>
 
         <form action="#">
           <div class="input-group input-navbar highlight-on-hover">
@@ -145,7 +145,7 @@
               <a class="nav-link highlight-on-hover" href="{{route('doctors')}}">Doctors</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link highlight-on-hover" href="blog.html">News</a>
+              <a class="nav-link highlight-on-hover" href="/news">News</a>
             </li>
             <li class="nav-item">
               <a class="nav-link highlight-on-hover" href="about.html">About Us</a>
@@ -236,7 +236,7 @@
         <p class="text-xl mb-0">{{$doctor['name']}}  {{$doctor['id']}}</p>
         <span class="text-sm text-grey">{{$doctor['specialization']}}</span>
 
-        <div class="rating" data-doctor-id="{{ $doctor->id }}">
+        <div class="rating" doctor_name="{{$doctor->name}}" data-doctor-id="<?php echo $doctor['id'];?>">
             @for ($i = 5; $i >= 1; $i--)
                 <span class="star" data-value="{{ $i }}">★</span>
             @endfor
@@ -344,61 +344,66 @@
   @if(Route::has('login'))
 
   @auth
+<div class="page-section" id="consult-section">
+    <div class="container">
 
-  <div class="page-section" id="consult-section">
-      <div class="container">
-
-        <center> <img src="https://cdn.dribbble.com/users/2517905/screenshots/8140964/media/7d5e2f8977c3fa786a8de673abca6084.gif" height="36%" width="36%"> </center>
-        <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
-
-
-        <form class="main-form">
-          <div class="row mt-5 ">
-
-            <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
-              <input type="text" class="form-control highlight-on-hover" id="name" placeholder="Full name *" value="{{Auth::User()->name}}" >
-            </div>
-
-            <div class="col-12 col-sm-6 py-2 wow fadeInRight">
-              <input type="text" id="email" class="form-control highlight-on-hover" placeholder="Email address *" value="{{Auth::user()->email}}">
-            </div>
-
-            <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
-              <input type="date" class="form-control highlight-on-hover" id="myDateInput" value="<?php echo $currentDate; ?>" placeholder="Date *">
-            </div>
-
-            <div class="col-12 col-sm-6 py-2 wow fadeInRight " data-wow-delay="300ms">
-              <select name="departement" id="checkup" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
-                <option value="general">General Health</option>
-                <option value="cardiology">Cardiology</option>
-                <option value="dental">Dental</option>
-                <option value="neurology">Neurology</option>
-                <option value="orthopaedics">Orthopaedics</option>
-              </select>
-            </div>
-
-            <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-              <input type="text" id="number" class="form-control highlight-on-hover" placeholder="Number *">
-            </div>
-
-            <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
+      <center> <img src="https://cdn.dribbble.com/users/2517905/screenshots/8140964/media/7d5e2f8977c3fa786a8de673abca6084.gif" height="36%" width="36%"> </center>
+      <h1 class="text-center wow fadeInUp">Make an Appointment</h1>
 
 
+      <form class="main-form">
+        <div class="row mt-5 ">
 
-            <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-              <textarea name="message" id="message" class="form-control highlight-on-hover" rows="6" placeholder="Enter message "></textarea>
-            </div>
-
+          <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+            <input type="text" class="form-control highlight-on-hover" id="name" placeholder="Full name *" value="{{Auth::User()->name}}" >
           </div>
 
-          <button type="submit" class="btn btn-primary mt-3 wow zoomIn highlight-on-hover">Submit Request</button>
-        </form>
-      </div>
+          <div class="col-12 col-sm-6 py-2 wow fadeInRight">
+            <input type="text" id="email" class="form-control highlight-on-hover" placeholder="Email address *" value="{{Auth::user()->email}}">
+          </div>
+
+          <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
+            <input type="date" class="form-control highlight-on-hover" id="myDateInput" value="<?php echo $currentDate; ?>" placeholder="Date *">
+          </div>
+
+          <div class="col-12 col-sm-6 py-2 wow fadeInRight " data-wow-delay="300ms">
+            <select  id="checkup_type" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
+              <option value="general">General Health</option>
+              <option value="cardiology">Cardiology</option>
+              <option value="dental">Dental</option>
+              <option value="neurology">Neurology</option>
+              <option value="orthopaedics">Orthopaedics</option>
+            </select>
+          </div>
+
+
+          <div class="col-12 py-2 wow fadeInRight " data-wow-delay="300ms">
+            <select  id="doctor_id" class="custom-select highlight-on-hover" aria-placeholder="Departement *">
+
+              @foreach($users as $user)
+              <option value="{{$user['id']}}">{{$user['name']}}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+            <input type="text" id="number" class="form-control highlight-on-hover" placeholder="Number *">
+          </div>
+
+          <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
+
+
+
+          <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+            <textarea name="message" id="message" class="form-control highlight-on-hover" rows="6" placeholder="Enter message "></textarea>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3 wow zoomIn highlight-on-hover">Submit Request</button>
+      </form>
     </div>
-
-
-              @if (Auth::check())
-
+  </div>
 
 
 
@@ -540,15 +545,123 @@
             star.addEventListener('click', (event) => {
                 const value = event.currentTarget.getAttribute('data-value');
                 const doctorId = document.querySelector('.rating').getAttribute('data-doctor-id');
+                const doctor_name = document.querySelector('.rating').getAttribute('doctor_name');
+                let message = `Rating ${value} submitted for Doctor ${doctor_name}`;
+
+                 Toastify({
+                  text: message,
+                  duration: 3000,
+                  close: true,
+                  gravity: 'top',
+                  position: 'center',
+                  backgroundColor: 'linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))', // Tomato color for error
+                  stopOnFocus: true
+                }).showToast();
 
                 // You can send an AJAX request to update the rating on the server
                 // For simplicity, this example just highlights the selected stars
-                alert(`Rating ${value} submitted for Doctor ${doctorId}`);
+                // alert(`Rating ${value} submitted for Doctor ${doctorId}`);
                 stars.forEach(s => s.classList.remove('active'));
                 star.classList.add('active');
             });
         });
     });
+</script>
+
+<script>
+  
+   $(document).ready(function() {
+    $('.main-form').submit(function(e) {
+      e.preventDefault();
+
+       var isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+
+      if (isLoggedIn == false) {
+            
+            Toastify({
+          text: 'Please Login for Make an appointment',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: 'linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))', // Tomato color for error
+          stopOnFocus: true
+        }).showToast();
+
+      }
+      else
+      {
+
+           // Get form data based on element IDs
+      var formData = {
+        user_id:$('#user_id').val(),
+        doctor_id:$('#doctor_id').val(),
+        name: $('#name').val(),
+        email: $('#email').val(),
+        date: $('#myDateInput').val(),
+        checkup_type: $('#checkup_type').val(),
+        number: $('#number').val(),
+        message: $('#message').val(),
+        _token: $('meta[name="csrf-token"]').attr('content')
+      };
+
+      // Client-side validation
+      if (!formData.name || !formData.email || !formData.date || !formData.checkup_type || !formData.number) {
+        // Show an error toast
+        Toastify({
+          text: 'Validation failed: Please fill * required fields.',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: 'linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))', // Tomato color for error
+          stopOnFocus: true
+        }).showToast();
+        return;
+      }
+
+      // Make Ajax request to the Laravel route
+      $.ajax({
+        type: 'POST',
+        url: '/submit-appointment',
+        data: formData,
+        success: function(response) {
+          // Show a success toast
+          Toastify({
+            text: response.message,
+            duration: 3000,
+            close: true,
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: '#4CAF50', // Green color for success
+            stopOnFocus: true
+          }).showToast();
+
+          // Optionally, reset the form
+          $('.main-form')[0].reset();
+        },
+        error: function(error) {
+          // Show an error toast for the Ajax request
+          Toastify({
+            text: 'Error submitting appointment. Please try again later.',
+            duration: 3000,
+            close: true,
+            gravity: 'top',
+            position: 'center',
+            backgroundColor: 'linear-gradient(to right, rgba(0, 217, 165, 0.9), rgba(255, 61, 133, 0.9))', // Tomato color for error
+            stopOnFocus: true
+          }).showToast();
+        }
+      });
+
+
+      }
+
+
+
+    });
+  });
+
 </script>
 
 <script src="../assets/js/jquery-3.5.1.min.js"></script>

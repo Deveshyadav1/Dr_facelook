@@ -21,6 +21,16 @@ use App\Http\Controllers\GoogleAuthController;
 });*/
 
 
+Route::middleware(['auth'])->group(function () {
+    // Your routes that require authentication go here
+
+       Route::get('/news', [HomeController::class,'news'])->name('news');
+       Route::get('/doctors',[DoctorController::class,'doctors'])->name('doctors');
+
+    // Add more routes as needed
+});
+
+
 Route::get('/home',[HomeController::class,'redirect']);
 
 Route::get('/',[HomeController::class,'index']);
@@ -41,9 +51,7 @@ Route::post('/create-appointment', [DoctorController::class,'create_appointment'
 
 
 
-Route::get('/news', [HomeController::class,'news'])->name('news');
 
-Route::get('/doctors',[DoctorController::class,'doctors'])->name('doctors');
 
 
 

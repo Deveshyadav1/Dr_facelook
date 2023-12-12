@@ -75,6 +75,8 @@
 <body class="bg-gray-100">
 
 
+
+
 <!-- start navbar -->
 <div class="md:fixed md:w-full md:top-0 md:z-20 flex flex-row flex-wrap items-center bg-white p-6 border-b border-gray-300">
 
@@ -502,6 +504,124 @@ $users = User::where('usertype', 0)->get();
 
 
   <!-- -- ========================================================== Start Content ================================================================ -- -->
+
+
+
+<div class="bg-gray-100 flex-1 p-6 md:mt-16">
+
+    <h3 style="text-align: left">Patients</h3>
+
+    <br>
+
+
+    <div class="search-container">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search...">
+        
+        <button class="add-button" id="offcanvasExampleLabel" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser" >Add</button>
+
+    </div>
+
+    <!-- <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
+        <i class="fa-solid fa-user-plus fa-xs"></i>
+        Add new user
+      </button> -->
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table-fixed w-full">
+
+        <!-- table head -->
+        <thead class="text-left">
+            <tr>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Patient</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Email</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Phone</th>
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-left">Address</th>
+            
+                <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-center">Action</th>
+            </tr>
+        </thead>
+        <!-- end table head -->
+
+        <!-- table body -->
+        <tbody class="text-left text-gray-600">
+
+
+@foreach ($patients as $patient)
+
+
+
+
+            <!-- item -->
+            <tr>
+                <!-- name -->
+                <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-left">
+                    <div class="w-8 h-8 overflow-hidden rounded-full">
+                        <img height="100%" width="100%" src="{{$item->profile_photo_url ?? 'doctor/img/user1.jpg'}}" class="profile_photo_url" alt="">
+                    </div>
+                    <p class="ml-3">{{$patient->name}}</p>
+                </th>
+                <!-- name -->
+
+            </th>
+
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-left">{{$patient->email}}</th>
+
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-left">{{$patient->phone}}</th>
+
+            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-left">{{$patient->address}}</th>
+
+
+                
+
+
+              <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-center">
+
+                <div class="flex flex-row justify-center items-center"> <a
+                href="/chatify/{{$patient->id}}"> <img height="35px"
+                width="35px"
+                src="https://i.pinimg.com/1200x/ee/ba/26/eeba26add7248f938ebd1b97fa41fba3.jpg"
+                class="profile_photo_url" alt=""> </a> &nbsp;&nbsp;
+
+                    <a href="#" class="btn mr-4 text-sm py-2 block">Edit</a>
+                    <a href="#" style="background-color: red" class="btn-shadow text-sm py-2 block">Delete</a>
+                </div>
+
+              </th>
+
+            </tr>
+
+@endforeach
+
+
+        </tbody>
+        <!-- end table body -->
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
 
 
 

@@ -39,7 +39,7 @@ class HomeController extends Controller
                         // ->get();
 
 
-                     $appointments = DB::table('user_appointments')
+                    $appointments = DB::table('user_appointments')
                         ->join('users', 'user_appointments.user_id', '=', 'users.id')
                         ->select('user_appointments.*', 'users.name', 'users.email', 'users.phone', 'users.address', 'users.avatar')
                         ->where('user_appointments.doctor_id', '=', $doctor_id)
@@ -50,12 +50,12 @@ class HomeController extends Controller
 
                          // Return todays appoientment for doctors role
                         // Get the count of appointments for today for the current logged-in doctor
-                        $todays_appoientment_count = User_appointment::where('date', now()->toDateString())
+                    $todays_appoientment_count = User_appointment::where('date', now()->toDateString())
                             ->where('doctor_id', $doctor_id)
                             ->count();
 
                         //Return all Patients for doctor role
-                        $patients = DB::table('patients')
+                    $patients = DB::table('patients')
                             ->join('users', 'patients.user_id', '=', 'users.id')
                             ->select('users.*')
                             ->where('patients.doctor_id', '=', $doctor_id)
@@ -64,18 +64,30 @@ class HomeController extends Controller
                             
                          
                         //Return Todays Register patisant  
-                        $todays_patients = DB::table('patients')
+                    $todays_patients = DB::table('patients')
                         ->join('users', 'patients.user_id', '=', 'users.id')
                         ->select('users.*')
                         ->where('patients.doctor_id', '=', $doctor_id)
                         ->whereDate(DB::raw('DATE(patients.created_at)'), '=', $today)
                         ->get();   
 
-                         $todays_patients_count = count($todays_patients);   
+                    $todays_patients_count = count($todays_patients);   
 
-                         
+                    
+                    
+                    $unreadMessages = DB::table('ch_messages')
+                        ->join('users', 'ch_messages.from_id', '=', 'users.id')
+                        ->where('ch_messages.to_id', '=', Auth::user()->id)
+                        ->where('ch_messages.seen', '=', 0)
+                        ->select('users.name', 'users.avatar', 'ch_messages.*')
+                        ->get();
 
 
+                    $message_count = count($unreadMessages);
+
+                        // echo "<pre>";
+
+                        // print_r($unreadMessages);die();
 
 
                     // $_SESSION['active_doctor'] = 1;
@@ -84,7 +96,9 @@ class HomeController extends Controller
                                                 'todays_appoientment_count' => $todays_appoientment_count,
                                                 'patients' => $patients,
                                                 'todays_patients' => $todays_patients,
-                                                'todays_patients_count' => $todays_patients_count
+                                                'todays_patients_count' => $todays_patients_count,
+                                                'messages' => $unreadMessages,
+                                                'message_count' => $message_count
                 ]);
             }
             else

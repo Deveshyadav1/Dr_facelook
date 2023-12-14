@@ -12,7 +12,8 @@
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+  <meta name="" content="Dr Facelook - Best Doctors near your location , Book a free appoientment">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -45,6 +46,55 @@
 
 <!-- Include CSRF token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+<style>
+  
+  header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9000;
+  background-color: white;
+}
+
+/* Add this CSS to add spacing to the content below the fixed header */
+body {
+  padding-top: 80px; /* Adjust the value based on your header's height */
+}
+
+/* Add this CSS to make the logo and search bar responsive */
+.navbar-brand {
+  font-size: 1.5rem; /* Adjust the font size as needed */
+}
+
+.input-navbar {
+  width: 100%;
+  max-width: 400px; /* Adjust the max-width as needed */
+}
+
+/* Add this CSS to adjust the spacing of the user profile image and logout button */
+.nav-link img {
+  margin-right: 5px;
+}
+
+/* Add this CSS to make the navigation links responsive */
+.navbar-nav {
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar-toggler {
+  order: -2; /* Move the toggle button to the top on small screens */
+}
+
+/* Add this CSS to adjust the spacing between navigation links on small screens */
+.navbar-nav > li {
+  margin-bottom: 10px;
+}
+
+</style>
+
 
 </head>
 <body>

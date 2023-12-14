@@ -80,4 +80,14 @@ class DoctorController extends Controller
 
     }
 
+    public function pharmacy_vendor()
+    {
+        return view('doctor.pharmacy_vendor');
+    }
+
+      public function dynamic_appointment()
+    {
+        return view('doctor.dynamic_appointment');
+    }
+
 }

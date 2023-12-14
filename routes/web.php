@@ -37,6 +37,10 @@ Route::get('/',[HomeController::class,'index']);
 
 Route::get('/appointment',[DoctorController::class,'appointment']);
 
+Route::get('/pharmacy_vendor',[DoctorController::class,'pharmacy_vendor']);
+
+Route::get('/dynamic_appointment',[DoctorController::class,'dynamic_appointment']);
+
 Route::get('/appointment_status',[DoctorController::class,'appointment_status']);
 
 Route::get('/patients',[DoctorController::class,'patients']);

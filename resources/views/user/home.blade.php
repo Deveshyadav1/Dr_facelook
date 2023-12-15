@@ -31,6 +31,10 @@
 
   <link rel="stylesheet" href="../assets/css/theme.css">
 
+  <!-- Add this line to include FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
@@ -139,7 +143,7 @@ body {
 
 @auth
 <li class="nav-item active">
-              <a class="nav-link highlight-on-hover" href="index.html">Home</a>
+              <a class="nav-link highlight-on-hover" href="/home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link highlight-on-hover" href="{{route('doctors')}}">Doctors</a>
@@ -277,14 +281,36 @@ body {
             
             <!-- <a href="about.html" id="" class="btn btn-primary row container d-flex justify-content-center">Book Your First Free Appoientment </a> -->
 
+<?php
+use App\Models\User;
+
+$users = User::select('*')
+                ->join('doctors', 'users.id', '=', 'doctors.user_id')
+                ->select('users.*', 'doctors.specialization','doctors.user_id', 'doctors.qualification', 'doctors.experience')
+                ->get()->toArray();
+
+// echo"<pre>";print_r($users);die();
+
+?>
 
 
+
+
+
+<!-- Doctor Icon -->
 
 
             
 <div class="page-content page-container" id="page-content">
+
     <div class="padding">
-      <a href="#consult-section"> <div class=""> <button type="button" id="animatebutton" class="btn btn-primary highlight-on-hover animatebutton"> <i class="fa fa-check btn-icon-prepend"></i>Book Your First Free Appoientment </button> </div></a>
+      <a href="#consult-section"> <div class=""> <i class="fas fa-user-injured"></i> <button type="button" id="animatebutton" class="btn btn-primary highlight-on-hover animatebutton"> <i class="fa fa btn-icon-prepend"></i>Book Your First Free Appoientment </button> </div></a>
+    </div>
+</div>
+<br>
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+       <a href="/apply_for_doctor"> <div class=""> <i class="fas fa-user-md"></i> <button type="button" id="animatebutton" class="btn btn-primary highlight-on-hover animatebutton"> <i class="fa fa btn-icon-prepend"></i>Are You A Doctor </button> </div></a>
     </div>
 </div>
 
@@ -299,19 +325,6 @@ body {
       </div>
     </div> <!-- .bg-light -->
   </div> <!-- .bg-light -->
-
-
-<?php
-use App\Models\User;
-
-$users = User::select('*')
-                ->join('doctors', 'users.id', '=', 'doctors.user_id')
-                ->select('users.*', 'doctors.specialization','doctors.user_id', 'doctors.qualification', 'doctors.experience')
-                ->get()->toArray();
-
-// echo"<pre>";print_r($users);die();
-
-?>
 
 
   <div class="page-section">
@@ -365,90 +378,35 @@ $users = User::select('*')
     </div>
   </div>
 
-  <div class="page-section bg-light">
-    <div class="container">
-      <h1 class="text-center wow fadeInUp">Latest News</h1>
-      <div class="row mt-5">
-        <div class="col-lg-4 py-2 wow zoomIn">
-          <div class="card-blog">
-            <div class="header">
-              <div class="post-category">
-                <a href="#">Covid19</a>
-              </div>
-              <a href="blog-details.html" class="post-thumb">
-                <img src="../assets/img/blog/blog_1.jpg" alt="">
-              </a>
-            </div>
-            <div class="body">
-              <h5 class="post-title"><a href="blog-details.html">List of Countries without Coronavirus case</a></h5>
-              <div class="site-info">
-                <div class="avatar mr-2">
-                  <div class="avatar-img">
-                    <img src="../assets/img/person/person_1.jpg" alt="">
-                  </div>
-                  <span>Roger Adams</span>
-                </div>
-                <span class="mai-time"></span> 1 week ago
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 py-2 wow zoomIn">
-          <div class="card-blog">
-            <div class="header">
-              <div class="post-category">
-                <a href="#">Covid19</a>
-              </div>
-              <a href="blog-details.html" class="post-thumb">
-                <img src="../assets/img/blog/blog_2.jpg" alt="">
-              </a>
-            </div>
-            <div class="body">
-              <h5 class="post-title"><a href="blog-details.html">Recovery Room: News beyond the pandemic</a></h5>
-              <div class="site-info">
-                <div class="avatar mr-2">
-                  <div class="avatar-img">
-                    <img src="../assets/img/person/person_1.jpg" alt="">
-                  </div>
-                  <span>Roger Adams</span>
-                </div>
-                <span class="mai-time"></span> 4 weeks ago
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 py-2 wow zoomIn">
-          <div class="card-blog">
-            <div class="header">
-              <div class="post-category">
-                <a href="#">Covid19</a>
-              </div>
-              <a href="blog-details.html" class="post-thumb">
-                <img src="../assets/img/blog/blog_3.jpg" alt="">
-              </a>
-            </div>
-            <div class="body">
-              <h5 class="post-title"><a href="blog-details.html">What is the impact of eating too much sugar?</a></h5>
-              <div class="site-info">
-                <div class="avatar mr-2">
-                  <div class="avatar-img">
-                    <img src="../assets/img/person/person_2.jpg" alt="">
-                  </div>
-                  <span>Diego Simmons</span>
-                </div>
-                <span class="mai-time"></span> 2 months ago
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-12 text-center mt-4 wow zoomIn">
-          <a href="blog.html" class="btn btn-primary">Read More</a>
-        </div>
 
+
+<div class="page-section bg-light">
+  <div class="container">
+    <h1 class="text-center wow fadeInUp">Latest News</h1>
+
+    <div id="newsCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" id="newsContainer">
+        <!-- News cards will be dynamically added here -->
       </div>
+      <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#newsCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
-  </div> <!-- .page-section -->
+
+    <div class="col-12 text-center mt-4 wow zoomIn">
+      <a href="/news" class="btn btn-primary">Read More</a>
+    </div>
+  </div>
+</div>
+
+
+  <!-- .page-section -->
 
 
 <!-- ===============================  Make An appointment =========================== -->
@@ -668,10 +626,10 @@ $users = User::select('*')
 
 
 
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -873,6 +831,77 @@ $users = User::select('*')
 
     });
   });
+</script>
+
+<script>
+  // Function to create a news card
+  function createNewsCard(news) {
+    return `
+      <div class="col-lg-4 py-2 wow zoomIn">
+        <div class="card-blog">
+          <div class="header">
+            <div class="post-category">
+              <a href="#">${news.source.name}</a>
+            </div>
+            <a href="${news.url}" class="post-thumb">
+              <img src="${news.urlToImage}" alt="">
+            </a>
+          </div>
+          <div class="body">
+            <h5 class="post-title"><a href="${news.url}">${news.title}</a></h5>
+            <div class="site-info">
+              <div class="avatar mr-2">
+                <div class="avatar-img">
+                  <img src="../assets/img/person/person_1.jpg" alt="">
+                </div>
+                <span>${news.author}</span>
+              </div>
+              <span class="mai-time">${news.publishedAt}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Function to populate the news cards from the News API
+  async function populateNewsCardsFromAPI() {
+    const newsContainer = document.getElementById("newsContainer");
+
+    try {
+      const apiKey = 'ceabb455dc164ddd9985c205e20fb8a1';
+      const apiUrl = `https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=${apiKey}`;
+
+      // Fetch data from the News API
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      // Check if the response contains articles
+      if (data.articles) {
+        // Loop through the API data and create news cards
+        for (let i = 0; i < data.articles.length; i += 3) {
+          const newsGroup = document.createElement("div");
+          newsGroup.className = i === 0 ? "carousel-item active" : "carousel-item";
+          newsGroup.innerHTML = `
+            <div class="row">
+              ${createNewsCard(data.articles[i])}
+              ${i + 1 < data.articles.length ? createNewsCard(data.articles[i + 1]) : ''}
+              ${i + 2 < data.articles.length ? createNewsCard(data.articles[i + 2]) : ''}
+            </div>
+          `;
+
+          newsContainer.appendChild(newsGroup);
+        }
+      } else {
+        console.error('No articles found in the API response.');
+      }
+    } catch (error) {
+      console.error('Error fetching data from the News API:', error);
+    }
+  }
+
+  // Call the function to populate the news cards from the News API
+  populateNewsCardsFromAPI();
 </script>
 
 

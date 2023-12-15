@@ -43,6 +43,55 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <style>
+  
+  header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+}
+
+/* Add this CSS to add spacing to the content below the fixed header */
+body {
+  padding-top: 80px; /* Adjust the value based on your header's height */
+}
+
+/* Add this CSS to make the logo and search bar responsive */
+.navbar-brand {
+  font-size: 1.5rem; /* Adjust the font size as needed */
+}
+
+.input-navbar {
+  width: 100%;
+  max-width: 400px; /* Adjust the max-width as needed */
+}
+
+/* Add this CSS to adjust the spacing of the user profile image and logout button */
+.nav-link img {
+  margin-right: 5px;
+}
+
+/* Add this CSS to make the navigation links responsive */
+.navbar-nav {
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar-toggler {
+  order: -2; /* Move the toggle button to the top on small screens */
+}
+
+/* Add this CSS to adjust the spacing between navigation links on small screens */
+.navbar-nav > li {
+  margin-bottom: 10px;
+}
+
+</style>
+
+
+
+<style>
 
  /* Define a CSS class for a beautiful highlighting effect on hover */
 .highlight-on-hover {
@@ -341,6 +390,19 @@
   </div> <!-- .page-section -->
 
 
+
+<?php
+use App\Models\User;
+
+$users = User::select('*')
+                ->join('doctors', 'users.id', '=', 'doctors.user_id')
+                ->select('users.*', 'doctors.specialization','doctors.user_id', 'doctors.qualification', 'doctors.experience')
+                ->get()->toArray();
+
+// echo"<pre>";print_r($users);die();
+
+?>
+
   @if(Route::has('login'))
 
   @auth
@@ -405,7 +467,7 @@
     </div>
   </div>
 
-
+ @if (Auth::check())
 
   @endif
 
